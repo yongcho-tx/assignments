@@ -3,7 +3,7 @@ var readlineSync = require('readline-sync');
 
 function calculate(num1, num2, operator) {
     if (operator === 'add') {
-        return parseInt(num1, 16) + parseInt(num2, 16);
+        return parseInt(num1, 10) + parseInt(num2, 10);
     } else if (operator === 'sub') {
         return num1 - num2;
     } else if (operator === 'mul') {
