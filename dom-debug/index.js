@@ -1,8 +1,15 @@
-const colors = ["red", "blue", "green"];
+const colors = ["nothing","red", "blue", "green"];
 
 document.getElementById("add").addEventListener("click", function(e) {
     const subItem = createSubItem();
     document.getElementById("list").appendChild(subItem);
+})
+//creates the subItem when pressing the 'Enter' key
+document.getElementById("input").addEventListener("keypress", function(e) {
+    if (e.key === 'Enter') {
+    const subItem = createSubItem();
+    document.getElementById("list").appendChild(subItem);
+    }
 })
 
 function createDropDown(){
@@ -17,6 +24,7 @@ function createDropDown(){
         dropDown.append(option);
     }
     dropDown.addEventListener("change", function(e){
+        e.preventDefault();
         e.target.parentElement.style.backgroundColor = e.target.value;
     })
     return dropDown;
@@ -32,3 +40,15 @@ function createSubItem(e){
 
     return subItem;
 }
+//remove input text after clicking on 'Add new item'
+const removeTextByClick = document.getElementById('add'); 
+removeTextByClick.addEventListener('click', function() {
+    document.getElementById('input').value = '';
+})
+//remove input text after pressing the 'Enter' key'
+const removeTextByEnter = document.getElementById('input'); 
+removeTextByEnter.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+    document.getElementById('input').value = '';
+    }
+})
