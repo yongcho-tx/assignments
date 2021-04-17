@@ -87,14 +87,3 @@ console.log(everyOtherOccupation);
 
 
 //===========Gold Medal - Nesting============
-const arr = [
-    [0, 0, 0], 
-    [0, 0, 0], 
-    [0, 0, 0]
-];
-
-for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < i.length; j++) {
-    newArr.push([i][j])
-    }
-}
