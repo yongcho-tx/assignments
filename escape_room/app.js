@@ -11,7 +11,11 @@ let hasKeyInHand = false;
 
 while (stillAlive) {
     const escapeMoves = ['Put hand in hole', 'Find the key, or', 'Open the door'];
-    let index = readlineSync.keyInSelect(escapeMoves, 'Choose from the following list', {cancel: 'Quit'});
+    let index = readlineSync.keyInSelect(escapeMoves, 'Choose from the following list', {cancel: 'Quit Game'});
+    
+    if (index == -1) {
+        stillAlive = false;
+    }
     if (index == 0) {
         console.log(`You chose to put your hand in a hole. Game over, ${name}!`)
         stillAlive = false;
