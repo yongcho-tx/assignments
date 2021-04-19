@@ -59,7 +59,7 @@ function capitalize(strFive) {
 let testCaseFive = capitalize("hey friends! practice practice practice!");
 console.log(testCaseFive);
 
-
+//version two using replace method
 function capitalizeVTwo(strSix) {
     return strSix.replace(/(^\w{1})|(\s+\w{1})/g, firstLetter => firstLetter.toUpperCase().replace(/\s+/g, ' '));
 }
