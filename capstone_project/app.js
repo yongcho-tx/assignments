@@ -1,4 +1,6 @@
 const readline = require('readline-sync')
+chalk = require('chalk')
+
 
 const player = { 
     name: "", 
@@ -38,20 +40,18 @@ const weapons = () => {
         return weaponsChoice
     }
 const rewardItems = () => {
-        let items = ['Health spray', 'Booze', 'Flute', 'Harp'];
+        let items = ['Zapper', 'Booze', 'Flute', 'Harp'];
         let itemsRandom = randomNumber(0, items.length);
         let itemRewarded = items[itemsRandom];
         player.inventory.push(` ${itemRewarded}`);
-        console.log(`You have been rewared with ${itemRewarded}`)
+        console.log(`You have been rewared with a ${itemRewarded}`)
         return itemRewarded
     }
 const playerInventory = () => {
-        console.log(`\n${player.inventory}\n`);
-        if(readline.question(`To view game status, type 'Print' or 'p' `, {limit: ['p', 'Print']})) {
-            console.log(`\nYour current HP is ${player.hp}HP\n and you have the following items in your inventory [${player.inventory}]`)
-        }
+        console.log(chalk.bgGreen(`\n${player.inventory}\n`));
         // return player.inventory
     }
+const playerStatus = () => console.log(`\nYour current HP is ${player.hp}HP\n and you have the following items in your inventory [${player.inventory}]`)
 
 player.name = readline.question('Enter your name: ')
 let greeting = readline.question(`Hello ${player.name}! Are you ready to attempt to survive the month of April? [Hit 'Enter' key to begin at your own risk]`);
@@ -60,15 +60,15 @@ console.log(`Welcome to the month of April survival game. Good luck, ${player.na
 
 while (player.hp > 0 && gameActive) {
 
-    let select = readline.keyIn('What would you like to do? Enter \'w\' to walk, \'i\' to check inventory or \'q\' to quit game: ', {limit: '`wiq`'})
+    let select = readline.question(`What would you like to do? Enter 'w' to walk, 'i' to check inventory, 'p' or 'print' to check player status or 'q' to quit game: `, {limit: ['i', 'p', 'print', 'Print', 'P', 'q', 'Q', 'w', 'W']})
     if (select === 'w' || select === 'W') { 
-        console.log("==================\nYou are walking\n==================")
+        console.log(chalk.bold.gray("==================\nYou are walking\n=================="))
         let num = randomNumber(1, 4)
         randomEnemy = randomNumber(0, enemiesArray.length)
         if (num === 1) {
-            console.log(`#####################################################\nYou've come across an enemy! ${enemiesArray[randomEnemy].name} has appeared!\n#####################################################`)
+            console.log(chalk.red(`#####################################################\nYou've come across an enemy! ${enemiesArray[randomEnemy].name} has appeared!\n#####################################################`))
             // console.log(enemiesArray[randomEnemy].name)
-            let action = readline.keyIn('\nWhat would you like to do? Attack \'a\' or run \'r\': \n', {limit: 'ar'})
+            let action = readline.question('\nWhat would you like to do? Attack \'a\' or run \'r\': \n', {limit: ['a', 'r']})
             
             if (action === 'r')  { 
                 console.log("You chose to run")
@@ -91,15 +91,19 @@ while (player.hp > 0 && gameActive) {
     
     if (select === 'i' || select === 'I') { 
         // check their inventory 
-        console.log("=====Player Inventory=====")
+        console.log(chalk.green("=====Player Inventory====="))
         playerInventory();
     }
     if (select === 'q' || select === 'Q') { 
         // quit
         gameActive = false
-        console.log('You quit the game! Bye!')
+        console.log(chalk.bgBlue('You quit the game! Bye!'))
+    }
+    if (select === 'p' || select === 'P' || select === 'Print' || select === 'print') {
+        playerStatus()
     }
 }
+
 
 function fight() { 
     // fight sequence happens here
@@ -107,20 +111,20 @@ function fight() {
            if (enemiesArray[randomEnemy].hp > 0 && player.hp > 0) {
                enemyHP()
                playerHP()
-               console.log(`You attacked your enemy with a ${weapons()}. \nThe enemy has ${enemiesArray[randomEnemy].hp} HP and you have ${player.hp} HP left`)
+               console.log(chalk.magenta(`You attacked your enemy with a ${weapons()}. \nThe enemy has ${enemiesArray[randomEnemy].hp} HP and you have ${player.hp} HP left`))
             //    action = readline.keyIn('What would you like to do? Attack \'a\' or run \'r\': ', {limit: 'ar'})
-           }
-           if (player.hp < 1) {
+            }        
+           if(player.hp < 1) {
                gameActive = false
-               console.log(`!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n You died in the hands of ${enemiesArray[randomEnemy].name} \n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`)
+               console.log(chalk.yellow(`!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n Game over :( (*.*) You died in the hands of ${enemiesArray[randomEnemy].name} \n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`))
            }
-           if (enemiesArray[randomEnemy].hp < 1 && player.hp > 0) {
-                console.log(`You have killed ${enemiesArray[randomEnemy].name} and you have won ${rewardItems()}`)
+           if(enemiesArray[randomEnemy].hp < 1 && player.hp > 0) {
+                console.log(`You have killed ${enemiesArray[randomEnemy].name} and you have won a ${rewardItems()}`)
                 player.hp += randomNumber(1, 100)
                enemiesArray.splice(randomEnemy, 1)
                console.log(enemiesArray)
                if(enemiesArray.length === 0) {
-                   console.log(`****************************\n You have finished the game \n****************************`)
+                   console.log(chalk.bgYellow(`****************************\n Congratulations!!! You have finished the game \n****************************`))
                    gameActive = false
                }
                break
