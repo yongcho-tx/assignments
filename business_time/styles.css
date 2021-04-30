@@ -1,5 +1,5 @@
 header .site-brand {
-    background: url('./images/Free_Sample_By_Wix.jpeg') top left no-repeat;
+    background: url(../images/Free_Sample_By_Wix.jpeg) top left no-repeat;
     width: 200px;
     height: 200px;
     grid-column: 3/4;
@@ -15,7 +15,7 @@ header .site-brand {
     width: auto;
 }
 .col1 {
-    background-image: url('./images/Free_Sample_By_Wix.jpeg');
+    background-image: url(../images/Free_Sample_By_Wix.jpeg);
     background-repeat: no-repeat;
     height: 200px;
     width: 100%;
