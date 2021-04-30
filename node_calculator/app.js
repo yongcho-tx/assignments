@@ -2,13 +2,13 @@ var readlineSync = require('readline-sync');
 
 
 function calculate(num1, num2, operator) {
-    if (operator === 'add') {
+    if (operator === '+') {
         return parseInt(num1, 10) + parseInt(num2, 10);
-    } else if (operator === 'sub') {
+    } else if (operator === '-') {
         return num1 - num2;
-    } else if (operator === 'mul') {
+    } else if (operator === '*') {
         return num1 * num2;
-    } else if (operator === 'div') {
+    } else if (operator === '/') {
         return num1 / num2;
     } else {
         return "error";
@@ -17,6 +17,6 @@ function calculate(num1, num2, operator) {
 
 let num1 = readlineSync.question('Please enter your first number: ')
 let num2 = readlineSync.question('Please enter your second number: ')
-let operator = readlineSync.question('Please enter the operation to perform: add, sub, mul, div: ')
+let operator = readlineSync.question('Please enter the operation to perform: +, -, *, /: ')
 
 console.log("The result is: " + calculate(num1, num2, operator))
