@@ -9,7 +9,9 @@ addForm.addEventListener('submit', function(e) {
    
     sum = number1 + number2
     const span = document.createElement('span')
-    span.textContent = sum
+    span.textContent = ` ${sum}`
+    span.style.fontSize = '20px'
+    span.style.color = 'blue'
     document.getElementById('addEquals').append(span)
 })
 
@@ -23,7 +25,9 @@ subForm.addEventListener('submit', (e) => {
 
     sub = number1 - number2
     const span = document.createElement('span')
-    span.textContent = sub
+    span.textContent = ` ${sub}`
+    span.style.color = 'red'
+    span.style.fontSize = '20px'
     document.getElementById('subEquals').append(span)
 })
 
@@ -37,6 +41,8 @@ multiForm.addEventListener('submit', (e) => {
 
     multi = number1 * number2
     const span = document.createElement('span')
-    span.textContent = multi
+    span.textContent = " " + multi
+    span.style.color = 'green'
+    span.style.fontSize = '20px'
     document.getElementById('multiEquals').append(span)
 })
