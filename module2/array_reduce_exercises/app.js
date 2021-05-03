@@ -5,8 +5,9 @@ console.log(total([1,2,3])); // 6
 
 //  2) Turn an array of numbers into a long string of all those numbers.
 const stringConcat = arr => arr.reduce((a, b) => a.toString() + b.toString())
+console.log(`\nArray of numbers => strings:`)
 console.log(stringConcat([1,2,3])); // "123"
-console.log(typeof(stringConcat([1,2,3])))
+
 
 // 3) Turn an array of voter objects into a count of how many people voted
 const totalVotes = arr => voters.map(el => el.voted).reduce((a, b) => a + b)
@@ -25,6 +26,7 @@ const totalVotes = arr => voters.map(el => el.voted).reduce((a, b) => a + b)
      {name: 'Jeff', age: 30, voted: true},
      {name: 'Zack', age: 19, voted: false}
  ];
+ console.log(`\nNumber of voters:`)
  console.log(totalVotes(voters)); // 7
 
 
@@ -38,5 +40,5 @@ const shoppingSpree = arr => wishlist.map(num => num.price).reduce((a, b) => a +
      { title: "Gold fidgit spinner", price: 2000 },
      { title: "A second Tesla Model S", price: 90000 }
  ];
- console.log(`The price of all items in wishlist combined:`)
+ console.log(`\nThe price of all items in wishlist combined:`)
  console.log(shoppingSpree(wishlist)); // 227005
