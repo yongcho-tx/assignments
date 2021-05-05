@@ -31,16 +31,16 @@ window.addEventListener("scroll", e => {
         document.querySelector('.square').style.backgroundColor = 'Orange';
     })
 
-document.addEventListener("keydown", (e) => {
-    if(event.keyCode == 66) {
+document.addEventListener("keydown", e => {
+    if(e.key === 'b' || e.key === 'B') {
         document.querySelector('.square').style.backgroundColor = "Blue";
-    } if(event.keyCode == 82) {
+    } if(e.key === 'r' || e.key === 'R') {
         document.querySelector('.square').style.backgroundColor = "Red";
-    } if(event.keyCode == 89) {
+    } if(e.key === 'y' || e.key === 'Y') {
         document.querySelector('.square').style.backgroundColor = "Yellow";
-    } if(event.keyCode == 71) {
+    } if(e.key === 'g' || e.key === 'G') {
         document.querySelector('.square').style.backgroundColor = "Green";
-    } if(event.keyCode == 79) {
+    } if(e.key === 'o' || e.key === 'O') {
         document.querySelector('.square').style.backgroundColor = "Orange";
     }
 })
