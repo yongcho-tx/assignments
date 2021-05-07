@@ -11,29 +11,32 @@
         <h1>Do Little Calculator</h1>
         <div class="add">
             <h1>Addition Input</h1>
-            <form name='add-form'>
+            <form name='addform'>
                 <input type='number' name='firstNumber'>
-                <button name='positiveSign'>+</button>
+                <button name='positiveSign' value='positive'>+</button>
                 <input type='number' name='secondNumber'>
                 <span id='addEquals'>=</span>
+                <p class='logAdd'></p>
             </form>
         </div>
         <div class="subtract">
             <h1>Subtraction Input</h1>
-            <form name='sub-form'>
+            <form name='subform'>
                 <input type='number'name='firstNumber'>
-                <button>-</button>
+                <button name='negativeSign' value='negative'>-</button>
                 <input type='number'name='secondNumber'>
                 <span id='subEquals'>=</span>
+                <p class='logSub'></p>
             </form>
         </div>
         <div class="multiply">
             <h1>Multiplication Input</h1>
-            <form name='multi-form'>
+            <form name='multiform'>
                 <input type='number'name='firstNumber'>
-                <button>*</button>
+                <button name='multiSign' value='multiply'>*</button>
                 <input type='number'name='secondNumber'>
                 <span id='multiEquals'>=</span>
+                <p class='logMulti'></p>
             </form>
         </div>
     </div> 
