@@ -20,4 +20,4 @@ const formAlert = (e) => {
 
 }
 
-submit.addEventListener('click', formAlert)
+form.addEventListener('submit', formAlert)
