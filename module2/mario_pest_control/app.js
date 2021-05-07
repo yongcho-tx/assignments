@@ -17,7 +17,6 @@ const totalPrice = (e) => {
     }
 
     let total = goomba+bobomb+cheap;
-    const span = document.createElement('span')
     log.textContent= `${total} coins`
     form.reset()
 }
