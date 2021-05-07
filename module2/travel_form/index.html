@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmyrates Airlines Ltd.</title>
+    <link rel='stylesheet' href='styles.css'>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Emmyrates Airlines</h1>
+    </header>
+    <div class="form-container">
+        <form name='travel-form'>
+            <div class='firstname'>
+                <label for='first-name'>First Name:</label>
+                <input type='text' name='first-name' required>
+            </div>
+            <div class='lastname'>
+                <label for='last-name'>Last Name:</label>
+                <input type='text' name='last-name' required>
+            </div>
+            <div class='age'>
+                <label for='age'>Age:</label>
+                <input type='number' name='age'>
+            </div>
+            <div class='gender'>
+                <p>Select your gender:</p>
+                <input type='radio' name='gender' id='male' value='Male'>
+                <label for='male'>Male</label>
+                <input type='radio' name='gender' id='female' value='Female'>
+                <label for='female'>Female</label>
+                <input type='radio' name='gender' id='other' value='Other'>
+                <label for='other'>Other</label>
+            </div>
+            <div class='destination'>
+                <p>Select your destination:</p>
+                <select name='destination'>
+                    <option value="Kahului" name='hawaii'>Kahului</option>
+                    <option value="London" name="united-kingdom">London</option>
+                    <option value="Barcelona" name="espana">Barcelona</option>
+                    <option value="Paris" name="france">Paris</option>
+                    <option value="Austin" name="texas">Austin</option>
+                </select>
+            </div>
+            <div class='dietary-restriction'>
+                <p>Mark any dietary restrictions:</p>
+                <input class='diet' type='checkbox' name='diet' id='vegan' value='Vegan'>
+                <label for='vegan'>Vegan</label>
+                <input class='diet' type='checkbox' name='diet' id='keto' value='Keto'>
+                <label for='keto'>Keto</label>
+                <input class='diet' type='checkbox' name='diet' id='carnivore' value='Carnivore'>
+                <label for='carnivore'>Carnivore</label>
+                <input class='diet' type='checkbox' name='diet' id='gluten-free' value='Gluten-free'>
+                <label for='gluten'>Gluten-free</label>
+                <input class='diet' type='checkbox' name='diet' id='no-restrictions' value='No-restrictions'>
+                <label for='no-restriction'>No Restriction</label>
+            </div>
+            <button id='submit'>Submit</button>
+        </form>
+    </div>    
+    <script src='app.js'></script>
+</body>
+</html>

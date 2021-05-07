@@ -1,0 +1,65 @@
+header {
+    margin: 0 auto;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+}
+header h1 {
+    color: white;
+}
+form {
+    /* border: 2px solid black; */
+    display: grid;
+    grid-gap: 5px;
+    width: 530px;
+    margin: 20px;
+    border-radius: 5px;
+    background: skyblue;
+}
+
+body {
+    background: url('flight.jpeg');
+    background-repeat: no-repeat;
+    width: 100vw;
+}
+
+button {
+    height: 2em;
+    width: 10em;
+    justify-self: center;
+    margin-bottom: 20px;
+}
+
+input[type='text'], input[type='number'] {
+    width: 9em;
+    margin: 10px;
+    font-size: 16px;
+}
+select[name='destination'] {
+    width: 10em;
+}
+.name {
+    /* display: flex;
+    flex-direction: column; */
+    margin: 10px;
+}
+.gender {
+    margin: 10px;
+    font-size: 22px;
+}
+.age {
+    padding-left: 42px;
+}
+.firstname, .lastname, .age {
+    margin: 10px;
+    /* color: white; */
+    font-size: 22px;
+}
+.destination {
+    margin: 10px;
+    font-size: 22px;
+}
+.dietary-restriction {
+    margin: 10px;
+    font-size: 22px;
+}
