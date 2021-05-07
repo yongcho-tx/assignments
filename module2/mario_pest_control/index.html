@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario Pest Control</title>
+    <link rel='stylesheet' href='styles.css'>
+</head>
+<body>
+    <header>
+        <h1>Mario Baddie Zapper Co.</h1>
+    </header>
+    <div class="baddie">
+        <form name='baddiecount'>
+        <ul>
+            <li id='goombas'>
+                <p><img src='goomba.png'></p>
+                <p>Baddie Name: Goomba</p>
+                <p>Price: 5 coins</p>
+                <p>Total Goombas Caught:
+                    <input type="number" id='goombaId' name='goomba'>
+                </p>
+            </li>
+            <li id='bobombs'>
+                <p><img src='bob-omb.png'></p>
+                <p>Baddie Name: Bob-omb</p>
+                <p>Price: 7 coins</p>
+                <p>Total Bob-ombs Caught:
+                    <input type="number" name='bobomb'>
+                </p>
+            </li>
+            <li id='cheapcheap'>
+                <p><img src='cheap-cheap.png'></p>
+                <p>Baddie Name: Cheap Cheap</p>
+                <p>Price: 11 coins</p>
+                <p>Total Cheap-Cheaps Caught:
+                    <input type="number" name='cheapcheap'>
+                </p>
+            </li>
+            <li id='totalprice'>
+                <button id='total'>Total Price:</button>
+                <p id='log'></p>
+            </li>
+        </ul>
+        </form>
+        </div>
+    <footer>
+        <ul>
+            <li>mario@mariobaddiezapper.co</li>
+            <li>http://www.mariobaddiezapper.co</li>
+            <li>1357 Mario Baddie Zapper Ave.</li>
+        </ul>
+    </footer>
+    <script src='app.js'></script>
+</body>
+</html>

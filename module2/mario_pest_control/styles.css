@@ -1,0 +1,41 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: royalblue;
+}
+footer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: rosybrown;
+}
+footer li {
+    list-style: none;
+}
+#goombas img {
+    width: 80px;
+    height: 80px;  
+}   
+#bobombs img {
+    width: 80px;
+    height: 80px;
+}   
+#cheapcheap img {
+    width: 80px;
+    height: 80px;
+}
+.baddie li {
+    list-style: none;
+}
+#total {
+    width: 10em;
+    color: blue;
+    font-size: 18px;
+}
+#log {
+    font-size: 24px;
+    color: red;
+    display: inline-block;
+    padding-left: 10px;
+}
