@@ -29,6 +29,9 @@ function listData(data) {
 
         const checkbox = document.createElement('input')
         checkbox.type = 'checkbox'
+        checkbox.style.transform = "scale(2)"
+        checkbox.style.marginLeft = "2em"
+        checkbox.style.marginRight = "2em"
         todoList.appendChild(checkbox)
         checkbox.addEventListener('change', (e) => {
             e.preventDefault()
@@ -48,12 +51,12 @@ function listData(data) {
                 } else {
                    h2.style.textDecoration = 'none'
                    
-                   const updates = {
+                   const updatesTwo = {
                        completed: false
                    }
 
             
-        axios.put('https://api.vschool.io/yong_cho/todo/'+id, updates)
+        axios.put('https://api.vschool.io/yong_cho/todo/'+id, updatesTwo)
             .then(res => console.log(res))
             .catch(err => console.log(err))     
                 }     
@@ -61,7 +64,8 @@ function listData(data) {
     
 
         const button = document.createElement('button')
-        button.textContent = 'x'
+        button.textContent = 'Delete'
+        button.style.transform = "scale(1.2)"
         todoList.appendChild(button)
         button.addEventListener('click', (e) => {
             e.preventDefault()
