@@ -1,0 +1,183 @@
+{
+    "menu": [
+        {   
+            "appetizers": [
+            {
+                "name": "fire seared chicken",
+                "ingredients": [
+                    "chicken",
+                    "honey",
+                    "salt",
+                    "pepper"
+                ],
+                "description": "chicken marinated in salt, pepper, and honey cooked over fire"
+            },
+            {   
+                "name": "fried pickle",
+                "ingredients": [
+                    "pickle",
+                    "flour",
+                    "salt",
+                    "pepper",
+                    "vegetable oil"
+                ],
+                "description": "crispy juicy fried pickle"
+            },
+            {
+                "name": "fried gator tail",
+                "ingredients": [
+                    "gator mean",
+                    "flour",
+                    "cajun spices",
+                    "peanut oil",
+                    "black pepper"
+                ],
+                "description": "alligator tail that leaves you with more than just I had a chicken feeling"
+            }
+        ],
+          
+            "cold sandwiches": [ 
+            {
+                "name":   "bbq pork sandwich", 
+                "ingredients": [
+                    "bbq pork",
+                    "pickled raddish",
+                    "butter",
+                    "french bread",
+                    "cilantro"
+                ],
+            
+                "description": "bahnmi sandwich with bbq pork"
+
+            },
+            {
+                "name": "salami overloaded",
+                "ingredients": [
+                    "salami",
+                    "onions",
+                    "pickles",
+                    "lettuce"
+                ],
+                "description": "tasty sandwich overloaded with salami"
+            },
+            {
+                "name": "bacon lettuce tomato",
+                "ingredients": [
+                    "bacon",
+                    "lettuce",
+                    "mayo",
+                    "tomatos"
+                ],
+                "description": "classic cold sandwich"
+            }
+            ],
+
+        
+            "hot sandwiches": [
+            {
+                "name": "tuna melt",
+                "ingredients": [
+                    "tuna",
+                    "mayo",
+                    "celery",
+                    "pepper",
+                    "asiago cheese"
+                ],
+                "description": "tasty tuna seasoned topped with asiago cheese"
+            },    
+            
+            {
+                "name": "kafta beef sandwich",
+                "ingredients": [
+                    "five spice",
+                    "parsley",
+                    "cloves",
+                    "allspice",
+                    "onions",
+                    "bread",
+                    "sumac",
+                    "butter"
+                ],
+                "description": "lebanese kafta beef on a buttered french bun"
+            },
+            {
+                "name": "philly cheesesteak",
+                "ingredients": [
+                    "steak",
+                    "bell peppers",
+                    "pepper jack cheese",
+                    "butter",
+                    "pepper",
+                    "submarine bread"
+                ],
+                "description": "original philadelphia inspired sandwich"
+            }
+                
+            ],
+            "desserts": [
+                {
+                    "name": "pumpkin pie",
+                    "ingredients": [
+                        "pumpkin",
+                        "whipped cream",
+                        "pie crust",
+                        "sugar"
+                    ],
+                    "description": "classic pie featuring pumpkin"
+                },
+                {
+                    "name": "keylime pie",
+                    "ingredients": [
+                        "key limes",
+                        "pie crust",
+                        "sugar",
+                        "whipped cream",
+                        "eggs"
+                    ],
+                    "description": "an original taste of keywest"
+                },
+                {
+                    "name": "banana split",
+                    "ingredients": [
+                        "cherry",
+                        "banana",
+                        "vanilla ice cream",
+                        "chocolate"
+                    ],
+                    "description": "hot melted chocolate over ice cream with banana"
+                }
+            ],
+
+            "drinks": [
+                {
+                    "name": "royal clown cola",
+                    "ingredients": [
+                        "carbonated water",
+                        "company secret ingredients"
+                    ],
+                    "description": "cola that taste none like coca-cola"
+                },
+                {
+                    "name": "cream soda",
+                    "ingredients": [
+                        "carbonated water",
+                        "cream",
+                        "sugar",
+                        "undisclosed ingredients"
+                    ],
+                    "description": "a cream thirst quencher"
+                },
+                {
+                    "name": "sprite",
+                    "ingredients": [
+                        "carbonated water",
+                        "pure cane sugar",
+                        "secret ingredients"
+                    ],
+                    "description": "a must beverage on a flight to reduce motion sickness"
+                }
+              
+            ]
+        }
+    ]
+}
