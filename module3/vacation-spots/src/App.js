@@ -9,7 +9,7 @@ function App() {
     return (
         <div className="main">
         <header className="navbar">
-            <h1>Vacation Spots</h1></header>
+            <h1>Exciting Vacation Spots</h1></header>
             <div className="card-container">
                 {cardComponents}
             </div>
