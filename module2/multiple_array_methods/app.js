@@ -8,7 +8,7 @@
 // 3. each name and age is embedded in a string that looks like an HTML <li> element.
 
 
-var peopleArray = [
+let peopleArray = [
     {
         firstName: "Sarah",
         lastName: "Palin",
@@ -51,6 +51,12 @@ const sortedOfAge = arr => arr.filter(name => name.age > 18)
     .map(obj => `<li>${obj.firstName} ${obj.lastName} is ${obj.age}</li>`)
 console.log(sortedOfAge(peopleArray))
 
+//New solution added on 6/1/21
+
+// const sortedOfAge = arr => arr.filter(name => name.age > 18)
+//     .sort((a, b) => a.lastName.localeCompare(b.lastName))
+//     .map(obj => `<li>${obj.firstName} ${obj.lastName} is ${obj.age}</li>`)
+
 // Expected Output: 
 // [ 
 //     "<li>Kyle Mooney is 27</li>",
@@ -65,3 +71,14 @@ console.log(sortedOfAge(peopleArray))
 // Create a function that filters out all people who's last names end with "y" or "a" and save those people in another array.
 // Remove the second individual from the array.
 // Return the array in reverse order.
+
+// class Person {
+//     constructor(firstName, lastName, age) {
+//         this.firstName = firstName;
+//         this.lastName = lastName;
+//         this.age = age;
+//     }
+// }
+// const joe = new Person("Joe", "Schmoe", 39)
+// peopleArray.push(joe)
+// console.log(peopleArray)
