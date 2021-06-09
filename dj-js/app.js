@@ -12,19 +12,6 @@ const sq = document.querySelector('.square')
 // Orange when scrolling anywhere on the screen
 window.addEventListener("scroll", e => sq.style.backgroundColor = 'Orange')
 
-// document.addEventListener("keydown", e => {
-//       if(e.key === 'b' || e.key === 'B') {
-//         sq.style.backgroundColor = "Blue";
-//     } else if(e.key === 'r' || e.key === 'R') {
-//         sq.style.backgroundColor = "Red";
-//     } else if(e.key === 'y' || e.key === 'Y') {
-//         sq.style.backgroundColor = "Yellow";
-//     } else if(e.key === 'g' || e.key === 'G') {
-//         sq.style.backgroundColor = "Green";
-//     } else if(e.key === 'o' || e.key === 'O') {
-//         sq.style.backgroundColor = "Orange";
-//     }
-// })
 document.addEventListener("keydown", e => (
         (e.key === 'b' || e.key === 'B') 
         ? sq.style.backgroundColor = "Blue"
