@@ -1,0 +1,20 @@
+.container {
+    margin-top: 10em;
+    margin-left: 5em;
+}
+.dj-squares {
+    display: grid;
+    grid-template-columns:  1fr 1fr;
+    grid-gap: 2em;
+}
+.square {
+    width: 300px;
+    height: 300px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+button {
+    height: 3em;
+    width: 19rem;
+    font-size: 1.2em;
+}
