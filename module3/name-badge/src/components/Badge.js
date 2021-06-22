@@ -2,7 +2,6 @@ import React from "react"
 
 
 function Badge (props) {
-    const isBackgroundGray = 'true'
     console.log(props.badgeItems.firstName)
     console.log(props.index, "Index of Badge" + props.index + 1)
         return( 
