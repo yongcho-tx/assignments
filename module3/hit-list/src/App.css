@@ -1,0 +1,26 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2em;
+    margin: 6em;
+}
+
+.header-img {
+    width: 250;
+    height: 125px;
+}
+header {
+    display: flex;
+    background: gray;
+}
+h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1em;
+    color: #b30000;
+    font-weight: normal;
+}
+body {
+    background-image: url("mobBackground.jpg")
+}
