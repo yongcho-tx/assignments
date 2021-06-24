@@ -1,0 +1,183 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.container {
+    display: grid;
+}
+p {
+    line-height: 2;
+    margin: .75em 0;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    font-size: 1.2em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+h1 {
+    font-size: 3.2em;
+}
+h3 {
+    font-size: 1.8em;
+    text-transform: uppercase;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: normal;
+}
+header {
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: lightgreen;
+}
+header h1, h2 {
+    font-weight: normal;
+}
+.intro {
+    padding-top: 2em;
+}
+.enlightenment {
+    margin-top: 3em;
+    margin: 0 auto;
+}
+.participation {
+    background: lightgreen;
+}
+.about {
+    background: lightblue;
+}
+.benefits {
+    padding-bottom: 3em;
+    background: lightgreen;
+}
+.author {
+    padding-bottom: 2em;
+    padding-top: 2em;
+    font-size: 32px;
+    text-align: center;
+    line-height: 2;
+    background: pink;
+}
+footer a {
+    text-decoration: none;
+}
+footer {
+    display: flex;
+    justify-content: center;
+    padding: .5em 0;
+    background: lightgreen;
+}
+footer a {
+    margin: 1em;
+}
+.fab {
+    border: 2px solid black;
+    border-radius: 50%;
+    padding: .3em;
+    /* background: white; */
+    color: black;
+    font-size: 3em;
+    /* width: 2em;
+    height: 2em; */
+    text-align: center;
+}
+.sidebar {
+    background: #c0cac3;
+}
+.otherDesigns ul {
+    list-style: none;
+}
+.otherDesigns li {
+    width: 35%;
+    float: left;
+    padding: 1.5em 5%;
+}
+.zenName {
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 1.2em;
+    display: block;
+}
+.zenArtist {
+    font-size: 1em;
+    text-align: left;
+    text-decoration: none;
+}
+.otherDesigns li:nth-child(2n+1) {
+    clear: left;
+}
+.zenResources ul {
+    list-style: none;
+}
+.zenResources li {
+    padding: 1.5em 0 1.25em 0;
+    width: 35%;
+    float: left;
+    padding: 1.5em 5%;
+}
+.zenResources a {
+    text-decoration: none;
+    font-size: 1.2em;
+    display: block;
+}
+.authorP {
+    font-size: 23px;
+}
+
+@media only screen and (min-width: 1132px) {
+    header {
+        grid-column: 1/3;
+    }
+    .container {
+        grid-template-columns: 2fr 1fr;
+    }
+    .intro, .enlightenment, .about, .participation, .benefits, .requirements {
+        grid-column: 1/2;
+    }
+    .requirements p:last-child {
+        grid-column: 1/span2;
+    }
+    footer {
+        grid-column: 1/span2;
+    }
+    .otherDesigns {
+        grid-column: 2/3;
+        grid-row: 2/5;
+        background: gray;
+    }
+    .otherDesigns li {
+        float: none;
+        width: auto;
+        margin: 0 30% 0 15%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .zenResources {
+        width: auto;
+        grid-column: 2/3;
+        grid-row: 5/7;
+        /* margin: 0 30% 0 15%; */
+        float: none;
+        background: peru;
+    }
+    .zenResources li {
+        float: none;
+        width: auto;
+        margin: 0 30% 0 15%;
+    }
+    .author {
+        grid-column: 1/3;
+        grid-row: 8/9;
+        background: pink;
+    }
+    .blank {
+        grid-column: 2/3;
+        grid-row: 7/8;
+        background: aquamarine;
+    }
+
+}

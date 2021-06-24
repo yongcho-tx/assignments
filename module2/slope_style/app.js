@@ -121,6 +121,8 @@ function populatePeople(names){
     return names.map(function(name){
         name = name.split(" ");
         const [firstName, lastName] = name
+        // const firstName = name[0]
+        // const lastName = name[1]
         return {
             firstName,lastName
         }
