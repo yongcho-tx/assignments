@@ -33,19 +33,15 @@ function listData(data) {
         checkbox.style.marginLeft = "2em"
         checkbox.style.marginRight = "2em"
         todoList.appendChild(checkbox)
+
         checkbox.addEventListener('change', (e) => {
             e.preventDefault()
                 if(checkbox.checked) {
 
                     h2.style.textDecoration = 'line-through'
-
-                    const updates = {
-
-                    completed: true
-
-                    } 
+                    const updates = {completed: true } 
                 
-        axios.put('https://api.vschool.io/yong_cho/todo/'+id, updates)
+        axios.put('https://api.vschool.io/yong_cho/todo'+id, updates)
             .then(res => console.log(res))
             .catch(err => console.log(err))
                 } else {
@@ -55,24 +51,21 @@ function listData(data) {
                        completed: false
                    }
 
-            
-        axios.put('https://api.vschool.io/yong_cho/todo/'+id, updatesTwo)
+        axios.put('https://api.vschool.io/yong_cho/todo'+id, updatesTwo)
             .then(res => console.log(res))
             .catch(err => console.log(err))     
                 }     
         })
     
-
         const button = document.createElement('button')
         button.textContent = 'Delete'
         button.style.transform = "scale(1.2)"
         todoList.appendChild(button)
         button.addEventListener('click', (e) => {
             e.preventDefault()
-            axios.delete(`https://api.vschool.io/yong_cho/todo/${id}`)
+            axios.delete('https://api.vschool.io/yong_cho/todo/'+id)
                 .then(res => getData())
                 .catch(err => console.log(err))
-                getData()
         })
 
      })
