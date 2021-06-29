@@ -1,4 +1,5 @@
 import React, {useEffect} from "react"
+import PropTypes from "prop-types"
 
 function Card(props) {
     useEffect(() => console.log("Card Default Props " + typeof(Card.defaultProps.background) ), [])
@@ -6,17 +7,24 @@ function Card(props) {
       
         let styles = {
             background: props.cardColor,
-            height: props.height?props.height:150,
-            width: props.width?props.width: 150,
-            border: props.border?props.border: "2px solid black"
+            height: props.height,
+            width: props.width,
+            border: props.border
         }
 
         return (
-            <div style={styles}>console.log({styles.background})</div>
+            <div style={styles}>Color HEX Code:<br /> {styles.background}</div>
         )
     }
+
+Card.propTypes = {
+    cardColor: PropTypes.string.isRequired,
+    height: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired
+}
+
 Card.defaultProps = {
-    background: "blue",
+    cardColor: "blue",
     height: 150,
     width: 150,
     border: "2px solid black"

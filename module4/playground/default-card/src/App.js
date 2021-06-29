@@ -5,29 +5,24 @@ import './App.css';
 
 class App extends React.Component {
 
+
     render() {
-      let randomColor = () => {
-          
-         let randomString = Math.floor(Math.random()*16777215).toString(16)
-        //  console.log(randomString.length)
-          if(randomString.length !== undefined) {
-            
-            if(randomString.length < 6) {
-              return "blue"
-            } 
-            else {
-              return "#" + randomString
-            }
-         }
+      
+      const randomColor = () => { 
+        const randomString = Math.floor(Math.random()*16777215).toString(16)
+        return randomString.length === 6 ? "#" + randomString : randomColor()
+      }
 
-         
-        }
+      const handleClick = () => {
+        this.setState({
+         cardColor: randomColor()
+        })
+      }
     
-  
-
       return (
         
         <div className="container">
+          <Card  />
           <Card cardColor={randomColor()} />
           <Card cardColor={randomColor()} />
           <Card cardColor={randomColor()} />
@@ -61,10 +56,24 @@ class App extends React.Component {
           <Card cardColor={randomColor()} />
           <Card cardColor={randomColor()} />
           <Card cardColor={randomColor()} />
-          
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <Card cardColor={randomColor()} />
+          <button onClick={handleClick}>Change Colors</button>
         </div>
 
-  );
+      )
     }
 }
 
