@@ -10,17 +10,21 @@ class ColorGen extends Component {
     }
 
     componentDidMount() {
+      this.fetchColors()
+    }
+
+    fetchColors = () => {
       axios.get(`https://www.colr.org/json/color/random?timestamp=${new Date().getTime()}`)
-      .then(res => res.data)
-      .then(data => {
-        this.setState({
-          color: data.colors
-        })
+      .then(res => {
+        console.log(res)
+        const colors = res.data.colors
+        console.log(colors)
+        this.setState({color: colors})
       })
       .catch(err => console.log(err))
     }
 
-    handleClick = () => this.componentDidMount() 
+    handleClick = () => this.fetchColors()
 
     render() {
       const {color} = this.state
