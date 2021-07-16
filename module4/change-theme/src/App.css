@@ -1,0 +1,24 @@
+header {
+    padding: 3em;
+}
+
+#footer {
+    padding: 6em;
+}
+.dark-theme {
+    background: #151515;
+    color: whitesmoke;
+}
+
+.light-theme {
+    background: whitesmoke;
+    color: #151515;
+}
+
+.whacky-theme {
+    background: linear-gradient(to right, #7AA1D2, #DBD4B4, #CC95C0);
+    color: #151515;
+}
+.atag-header > a {
+    margin: 2em;
+}
