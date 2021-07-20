@@ -2,7 +2,7 @@ import {useContext} from "react"
 import {UglyContext} from "../ContextProvider"
 
 
-function UglyForm(props) {
+const UglyForm = props => {
 
     const {handleChange, inputValues, handleSubmit, editUgly} = useContext(UglyContext)
 

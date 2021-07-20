@@ -3,7 +3,7 @@ import UglyCard from "./UglyCard"
 import {UglyContext} from "../ContextProvider"
 import "../App.css"
 
-function UglyList() {
+const UglyList = () => {
 
 const {deleteUglyItem, uglyItem, editUgly} = useContext(UglyContext)
 

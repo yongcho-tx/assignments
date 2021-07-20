@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import axios from "axios"
 const UglyContext = React.createContext()
 
-function UglyContextProvider(props) {
+const UglyContextProvider = props => {
 
 const [uglyItem, setUglyItem] = useState([])
 const [inputValues, setValues] = useState({
