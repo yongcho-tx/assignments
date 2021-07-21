@@ -1,8 +1,8 @@
 import React from "react"
 import "./App.css"
-import NavBar from "./component/NavBar"
-import Footer from "./component/Footer"
-import Main from "./component/Main"
+import NavBar from "./components/NavBar"
+import Footer from "./components/Footer"
+import Main from "./components/Main"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App(props) {
