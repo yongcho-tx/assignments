@@ -9,10 +9,7 @@ const ThemeContextProvider = props => {
         color: "#006500",
         isShift: false
     })
-        // background: "black",
-        // textColor: "white"
-        //if useState has more than one state defined, the spread operator does not work; however, for more than one, ...style (the spread operator) is required
-
+     
     const changeTheme = () => {
         setTheme(prevTheme => ({
             className: prevTheme.className === "light" ? "dark" : "light",
@@ -55,9 +52,12 @@ const ThemeContextProvider = props => {
             })
         )
     }
+    const h1Style = {
+        textAlign: "center",
+    }
 
     return (
-        <ThemeContext.Provider value={{...style, changeTheme, darkTheme, lightTheme, whackyTheme, changeLayout}}>
+        <ThemeContext.Provider value={{...style, changeTheme, darkTheme, lightTheme, whackyTheme, changeLayout, h1Style}}>
             {props.children}
         </ThemeContext.Provider>
     )
