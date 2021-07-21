@@ -1,6 +1,6 @@
 import './App.css';
-import UglyLogic from "./component/UglyLogic"
-import UglyForm from "./component/UglyForm"
+import UglyLogic from "./components/UglyLogic"
+import UglyForm from "./components/UglyForm"
 
 
 function App() {
