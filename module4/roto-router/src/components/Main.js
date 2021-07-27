@@ -1,20 +1,16 @@
 import styled from "styled-components"
-import Home from "./Home"
 
 const Wrapper = styled.div`
     height: 800px;
     border: 2px solid black;
-    display: felx;
+    display: flex;
     justify-content: center;
-    align-items: center
-`
-const Title = styled.h2`
-    text-align: center;
+    align-items: center;
+    flex-direction: column;
 `
 const Main = (props) => {
     return (
         <Wrapper>
-
             {props.children}
         </Wrapper>
     )

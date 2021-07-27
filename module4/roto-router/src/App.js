@@ -1,4 +1,4 @@
-import React, { Link, Route, Switch } from "react-router-dom"
+import React, { Link, Route, Switch, useHistory } from "react-router-dom"
 import About from "./components/About"
 import Gallery from "./components/Gallery"
 import Home from "./components/Home"
@@ -12,6 +12,11 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   margin: 2em;
 `
+
+const Button = styled.button`
+    width: 150px;
+    height: 50px;
+`
 function App() {
   const navStyles = {
     display: "grid",
@@ -19,6 +24,12 @@ function App() {
     gridTemplateColumns: "repeat(4, 1fr)",
     fontSize: "2em",
     border: "2px solid black"
+  }
+  const history = useHistory()
+  const handleClick = () => {
+      setTimeout(() => {
+          history.push("/")
+      }, 1000)
   }
   return (
     <div>
@@ -38,11 +49,13 @@ function App() {
           <Route path="/about">
               <Main>
                 <About />
+                <Button onClick={handleClick}>Click to go Home</Button>
               </Main>
           </Route>
           <Route path="/gallery">
               <Main>
                 <Gallery />
+                <Button onClick={handleClick}>Click to go Home</Button>
               </Main>
           </Route>
           <Route path="/home">
@@ -51,6 +64,7 @@ function App() {
           <Route path="/services">
             <Main>
               <Services />
+              <Button onClick={handleClick}>Click to go Home</Button>
             </Main> 
           </Route>
         </Switch>
