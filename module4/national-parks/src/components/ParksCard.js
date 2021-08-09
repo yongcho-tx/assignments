@@ -151,7 +151,7 @@ const ParksCard = (props) => {
                     return prevStartingPosition+props.cardCount})}>New Parks</ImgButton> */}
                 
 
-                <ImgButton onClick={() => randomParks(props.cardCount)}>More Parks</ImgButton>
+                <ImgButton onClick={() => randomParks(props.cardCount)}>New Parks</ImgButton>
 
                 <ImgButton onClick={() => setShowHistory(prevHistory => true)}>Parks in History</ImgButton>
             </ButtonWrapper>
