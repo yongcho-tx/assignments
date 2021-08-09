@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useState } from "react"
 import ParksCard from "./ParksCard"
 import styled from "styled-components"
 import { ParksContext } from "../contexts/ContextProvider"
@@ -17,16 +17,14 @@ justify-content: center;
 margin: 2em;
 `
 const Home = () => {
-    const { randomizedData, setRandomizedData } = useContext(ParksContext)
-    
+    const [inputNumber, setInputNumber] = useState(1)
     return (
         <>
             <Header>Discover National Parks</Header>
-            <h2>Featured Parks (randomally load 30 parks)</h2>
-            <ParksCard />
-            <ButtonWrapper>
-                <ImgButton>Get Parks</ImgButton>
-            </ButtonWrapper>
+            <h2>Input Number of Parks to View: <input type="number" value={inputNumber} onChange={(e) => setInputNumber(e.target.value)}></input></h2>
+            <ParksCard 
+            cardCount={parseInt(inputNumber)}
+            />
         </>
     )
 }
