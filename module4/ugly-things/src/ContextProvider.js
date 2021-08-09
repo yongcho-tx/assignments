@@ -32,7 +32,8 @@ const [inputValues, setValues] = useState({
         console.log(e.target)
         axios.delete(`https://api.vschool.io/yong-cho/thing/${id}`)
         .then(res => {
-            getData()
+            // getData()
+            setUglyItem(prevThing => prevThing.filter(thing => thing._id !== id))
             console.log("res", res)
             })
         .catch(err => console.log(err))
@@ -49,11 +50,11 @@ const [inputValues, setValues] = useState({
         axios.post(`https://api.vschool.io/yong-cho/thing/`, newThing)
         .then(res => {
             console.log(res.data)
-            getData()
+            setUglyItem(prevPost => [...prevPost, res.data])
+
         })
         .catch(err => (console.log(err)))
         setValues({title:"", description: "", imgUrl: ""})
-
     }
  
     const handleChange = e => {
@@ -70,7 +71,7 @@ const [inputValues, setValues] = useState({
         e.preventDefault()
         axios.put(`https://api.vschool.io/yong-cho/thing/${id}`, {title: inputValues.title, description: inputValues.description})
         .then(res => {
-            getData()
+            setUglyItem(prevThing => prevThing.map(thing => thing._id !== id ? thing : res.data))
             console.log("res", res)
         })
         .catch(err => console.log(err))
