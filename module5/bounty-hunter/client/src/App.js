@@ -38,6 +38,7 @@ export default function App(props) {
                 setBounties(prevBounties => prevBounties.map(bounty => bounty._id !== bountyId ? bounty : res.data))
                 console.log(res.data)
                 // props.setToggleEdit(false)
+
             })
             .catch(err => console.log(err))
     }

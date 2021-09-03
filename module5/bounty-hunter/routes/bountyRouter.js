@@ -29,7 +29,7 @@ const bounties = [
         bounty_amt: 120,
         type: "Jedi",
         _id: uuid()
-    }
+    },
 ]
 
 bountyRouter.get("/", (req, res) => {
@@ -55,12 +55,13 @@ bountyRouter.delete("/:bountyId", (req, res) => {
     bounties.splice(bountyIndex, 1)
     res.send("Successfully deleted bounty")
 })
-    .put("/:bountyId", (req, res) => {
+
+bountyRouter.put("/:bountyId", (req, res) => {
         const bountyId = req.params.bountyId
         const bountyIndex = bounties.findIndex(bounty => bounty._id === bountyId)
         const updatedBounty = Object.assign(bounties[bountyIndex], req.body)
         res.send(updatedBounty)
-    })
+})
 
 
 module.exports = bountyRouter

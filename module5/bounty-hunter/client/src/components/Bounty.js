@@ -14,7 +14,7 @@ export default function Bounty(props) {
                     <h1>Name: {first_name} {last_name}</h1>
                     <p>Bounty Amount: {bounty_amt}</p>
                     <p>Type: {type}</p>
-                    <button 
+                    <button
                         className="delete-btn"
                         onClick={() => props.deleteBounty(_id)}>
                         Delete
@@ -35,6 +35,7 @@ export default function Bounty(props) {
                         _id={_id}
                         btnText="Submit Edit"
                         submit={props.editBounty}
+                        handleClose={setEditToggle}
                         
                     />
                     <button 
