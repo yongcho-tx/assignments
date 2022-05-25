@@ -1,0 +1,45 @@
+* { box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+form {
+    border: 1px solid #333;
+    padding: 1px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+input {
+    padding: .5em;
+    font-size: 1em;
+    border: 1px solid #333;
+    border-radius: .25em;
+    width: 300px;
+}
+
+.product-square {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 1em;
+    border: 1px solid #333;
+    margin: 1em;
+    width: 50%;
+}
+
+.product-square > h3 {
+    margin-bottom: 1em;
+}
+
+.product-square > h4 {
+    margin-bottom: .5em;
+}
+
+button {
+    padding: 1em;
+    margin: .5em;
+}
