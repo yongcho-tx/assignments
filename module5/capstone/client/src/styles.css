@@ -6,7 +6,7 @@
 }
 
 form {
-    border: 1px solid #333;
+    /* border: 1px solid #333; */
     padding: 1px;
     margin: 5px;
     display: flex;
@@ -42,15 +42,14 @@ input {
 
 button {
     padding: 1em;
-    margin: .5em;
+    margin: 1em;
+
 }
 
 .gallery-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* align-items: center; */
     justify-items: center;
-    /* margin-top: 3em; */
     background: #9FE2BF;
 }
 

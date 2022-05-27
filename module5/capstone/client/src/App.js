@@ -3,6 +3,7 @@ import Home from './components/Home.js'
 import Main from './components/Main'
 import HomeBody from './components/HomeBody'
 import AddProductPage from './components/AddProductPage'
+import AddProductBody from './components/AddProductBody'
 import Footer from './components/Footer'
 import ProductGalleryPage from './components/ProductGalleryPage'
 import React, { Link, Route, Switch, useHistory } from 'react-router-dom'
@@ -51,10 +52,10 @@ export default function App() {
                         <Footer />
                     </Route>
                     <Route path="/addproduct">
-                        <Main>
+                        <AddProductBody>
                             <AddProductPage />
                             <Button onClick={handleClick}>Click to go Home</Button>
-                        </Main>
+                        </AddProductBody>
                         <Footer />
                     </Route>
                     <Route path="/productgallery">
@@ -62,6 +63,7 @@ export default function App() {
                             <ProductGalleryPage />
                             <Button onClick={handleClick}>Click to go Home</Button>
                         </Main>
+                        <Footer />
                     </Route>
                 </Switch>
              </div>
