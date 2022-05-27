@@ -23,12 +23,13 @@ input {
 }
 
 .product-square {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* display: grid;
+    grid-template-columns: repeat(3, 1fr); */
     padding: 1em;
     border: 1px solid #333;
     margin: 1em;
     width: 50%;
+    border-radius: 10px;
 }
 
 .product-square > h3 {
@@ -42,4 +43,27 @@ input {
 button {
     padding: 1em;
     margin: .5em;
+}
+
+.gallery-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* align-items: center; */
+    justify-items: center;
+    /* margin-top: 3em; */
+    background: #9FE2BF;
+}
+
+.addproducts-wrapper {
+    margin-top: 5em;
+    margin-bottom: 5em;
+}
+
+.sub-text {
+    margin-top: 2em;
+}
+
+.footer-logo {
+    text-transform: uppercase;
+    margin-bottom: 1em;
 }

@@ -45,7 +45,7 @@ export default function AddProductPage() {
     return (
         <div>
 
-            <div>
+            <div className="addproducts-wrapper">
                 <AddProductForm
                     submit={addProduct}
                     btnTxt="Add Product"

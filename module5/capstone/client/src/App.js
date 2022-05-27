@@ -1,9 +1,7 @@
-// import React, { useState, useEffect } from 'react'
 
-import Product from './components/Product.js'
-import AddProductForm from './components/AddProductForm.js'
 import Home from './components/Home.js'
 import Main from './components/Main'
+import HomeBody from './components/HomeBody'
 import AddProductPage from './components/AddProductPage'
 import Footer from './components/Footer'
 import ProductGalleryPage from './components/ProductGalleryPage'
@@ -14,6 +12,7 @@ import styled from 'styled-components'
 const StyledLink = styled(Link)`
   text-decoration: none;
   margin: 2em;
+  color: #ffffff;
 `
 const Button = styled.button`
     width: 150px;
@@ -24,9 +23,10 @@ export default function App() {
     const navStyles = {
         display: "grid",
         textAlign: "center",
-        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateColumns: "repeat(3, 1fr)",
         fontSize: "2em",
-        border: "2px solid black"
+        border: "2px solid black",
+        backgroundColor: "#2c2c2c"
       }
       const history = useHistory()
       const handleClick = () => {
@@ -38,22 +38,24 @@ export default function App() {
         <div>
             <div>
                 <navbar style={navStyles}>
-                    <Link to="/">Home</Link>
-                    <Link to="/addproduct">Add Products</Link>
-                    <Link to="/productgallery">Product Gallery</Link>
+                    <StyledLink to="/">Home</StyledLink>
+                    <StyledLink to="/addproduct">Add New Products</StyledLink>
+                    <StyledLink to="/productgallery">Product Gallery</StyledLink>
                 </navbar>
 
                 <Switch>
                     <Route exact path="/">
-                        <Main>
+                        <HomeBody>
                             <Home />
-                        </Main>
+                        </HomeBody>
+                        <Footer />
                     </Route>
                     <Route path="/addproduct">
                         <Main>
                             <AddProductPage />
                             <Button onClick={handleClick}>Click to go Home</Button>
                         </Main>
+                        <Footer />
                     </Route>
                     <Route path="/productgallery">
                         <Main>
@@ -62,7 +64,6 @@ export default function App() {
                         </Main>
                     </Route>
                 </Switch>
-                <Footer />
              </div>
         </div>
     )

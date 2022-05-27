@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Product from './Product.js'
 
-
 export default function ProductGalleryPage(props) {
     const [ products, setProducts ] = useState([])
 
@@ -43,16 +42,15 @@ export default function ProductGalleryPage(props) {
     return (
         <div>
 
-            <div>
-        
-            { products.map(product => 
-                <Product
-                    {...product}
-                    key={product._id}
-                    //deleteProd is the name of prop used in Product component; deleteProduct is the function at top of page
-                    // deleteProd={deleteProduct}
-                    // editProd={editProduct}
-                />)}
+            <div className="gallery-wrapper">
+                { products.map(product => 
+                    <Product
+                        {...product}
+                        key={product._id}
+                        //deleteProd is the name of prop used in Product component; deleteProduct is the function at top of page
+                        deleteProd={deleteProduct}
+                        editProd={editProduct}
+                    />)}
             </div>
         </div>
     )

@@ -7,11 +7,13 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 `
 const Footer = () => {
     return (
         <Wrapper>
-            <h2>This is a footer</h2>
+            <h3 className="footer-logo">Productspot</h3>
+            <h5 className="copyright">Copyright 2022 ProductSpot Inc.</h5>
         </Wrapper>
     )
 }

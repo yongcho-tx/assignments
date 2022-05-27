@@ -1,12 +1,11 @@
 import styled from "styled-components"
 
 const Wrapper = styled.div`
-
+    height: 800px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: #6495ED;
 `
 const Main = (props) => {
     return (
