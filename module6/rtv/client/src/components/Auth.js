@@ -33,7 +33,7 @@ export default function Auth() {
         resetAuthErr()
     }
         return (
-            <div>
+            <div className="auth-container">
                 <h1>Rock the Vote App</h1>
                 { !toggle ?
                     <>

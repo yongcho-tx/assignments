@@ -1,31 +1,35 @@
 import React, { useContext } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom'
-import Home from './components/Home.js'
 import Auth from './components/Auth.js'
 import Navbar from './components/Navbar.js'
 import Profile from './components/Profile.js'
 import Public from './components/Public.js'
 import { UserContext } from './context/UserProvider.js'
-
+import ProtectedRoute from './components/ProtectedRoute.js'
 
 export default function App() {
 
   const { token, logout } = useContext(UserContext)
   return (
     <div>
-      <Navbar logout={logout}/>
+      {/* if token exists, navbar will show */}
+      { token && <Navbar logout={logout}/> }
       <Routes>
         <Route 
           path="/" 
-          element={ token? <Navigate to="/profile" /> : <Auth /> }
+          element={ token ? <Navigate to="/profile" /> : <Auth /> }
         />
         <Route 
           path="/profile"
-          element={<Profile />}
+          element={<ProtectedRoute token={token} redirectTo="/">
+              <Profile/>
+          </ProtectedRoute>}
         />
         <Route 
           path="/public"
-          element={<Public />}
+          element={<ProtectedRoute token={token} redirectTo="/">
+              <Public/>
+            </ProtectedRoute>}
         />
       </Routes>
     </div>

@@ -11,3 +11,4 @@ export default function IssueList(props) {
         </div>
     )
 }
+
