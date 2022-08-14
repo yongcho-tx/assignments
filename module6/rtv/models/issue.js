@@ -18,15 +18,13 @@ const issueSchema = new Schema({
         default: 0
      },
 
-    postedBy: {
+     user: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
-    }
+     }
+
 })
 
-issueSchema.methods.vote = function(val) {
-    this.votes += Number(val)
-}
 
 module.exports = mongoose.model("Issue", issueSchema)

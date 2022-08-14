@@ -1,16 +1,24 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect, useContext } from 'react'
+import {userAxios} from '../context/UserProvider'
+import UserProvider, { UserContext } from '../context/UserProvider.js'
 
 const initInputs = {
     title: "",
-    description: ""
+    description: "",
+    comment: ""
 }
 
 export default function IssueForm(props) {
 
     const [inputs, setInputs] = useState(initInputs)
-    const { addIssue } = props
+    const { addIssue, addComment } = props
+    const {getUserIssues} = React.useContext(UserContext)
 
+    useEffect(() => { 
+        getUserIssues()
+        
+    }, [])
+    
     function handleChange(e) {
         const { name, value } = e.target
         setInputs(prevInputs => ({
@@ -24,6 +32,7 @@ export default function IssueForm(props) {
         setInputs(initInputs)
     }
 
+ 
     const { title, description } = inputs
 
     return (

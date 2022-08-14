@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 export const UserContext = React.createContext()
-
-const userAxios = axios.create()
+export const userAxios = axios.create()
 
 userAxios.interceptors.request.use(config => {
     const token = localStorage.getItem("token")
@@ -15,7 +14,8 @@ export default function UserProvider(props) {
         user: JSON.parse(localStorage.getItem("user")) || {}, 
         token: localStorage.getItem("token") || "",
         issues: [],
-        errMsg: ""
+        errMsg: "",
+        comments: []
     }
 
     const [userState, setUserState] = useState(initState)
@@ -74,6 +74,8 @@ export default function UserProvider(props) {
             errMsg: ""
         }))
     }
+
+
     function addIssue(newIssue) {
         userAxios.post("/api/issue", newIssue)
         .then(res => {
@@ -84,7 +86,7 @@ export default function UserProvider(props) {
         })
         .catch(err => console.log(err.response.data.errMsg))
     }
-
+    
     function getUserIssues() {
         userAxios.get("/api/issue/user")
         .then(res => {
@@ -95,6 +97,18 @@ export default function UserProvider(props) {
         })
         .catch(err => console.log(err.response.data.errMsg))
     }
+    function addComment(newComment, issueId) {
+        userAxios.post(`/api/comment/${issueId}`, newComment)
+        .then(res => {
+            setUserState(prevState => ({
+                ...prevState,
+                comments: [...prevState.issues, res.data]
+            }))
+        })
+        .catch(err => console.log(err.response.data.errMsg))
+    }
+
+
 
     return (
         <UserContext.Provider
@@ -104,7 +118,9 @@ export default function UserProvider(props) {
                 login,
                 logout,
                 addIssue,
-                resetAuthErr
+                resetAuthErr,
+                addComment,
+                getUserIssues
             }}>
             { props.children }
         </UserContext.Provider>
