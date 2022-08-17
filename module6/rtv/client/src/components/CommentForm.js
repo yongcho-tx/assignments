@@ -38,6 +38,24 @@ export default function CommentForm(props) {
         .catch(err => console.log(err))
 
     }
+
+    function CommentInput() {
+        return (
+            <div>
+                <form onSubmit={handleCommentSubmit}>
+                    <input
+                    type="text"
+                    name="comment"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="comment"/>
+                    <button>Add Comment</button>
+                </form>
+                <button onClick={(() => setComments([]))}>Close Comments</button>
+            </div>
+        )
+    }
+
     return (
         <>
 
@@ -46,17 +64,7 @@ export default function CommentForm(props) {
 
             comments.length > 0 && 
             <>
-            <form onSubmit={handleCommentSubmit}>
-                <input
-                    type="text"
-                    name="comment"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    placeholder="comment"/>
-                <button>Add Comment</button>
-            </form>
-           
-            <button onClick={(() => setComments([]))}>Close Comments</button>
+            <CommentInput />
             </>
         }                
 

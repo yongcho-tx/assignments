@@ -5,20 +5,20 @@ import UserProvider, { UserContext } from '../context/UserProvider.js'
 const initInputs = {
     title: "",
     description: "",
-    comment: ""
+    imgUrl: ""
 }
 
 export default function IssueForm(props) {
 
     const [inputs, setInputs] = useState(initInputs)
-    const { addIssue, addComment } = props
+    const { addIssue } = props
     const {getUserIssues} = React.useContext(UserContext)
 
     useEffect(() => { 
         getUserIssues()
         
     }, [])
-    
+
     function handleChange(e) {
         const { name, value } = e.target
         setInputs(prevInputs => ({
@@ -33,7 +33,7 @@ export default function IssueForm(props) {
     }
 
  
-    const { title, description } = inputs
+    const { title, description, imgUrl } = inputs
 
     return (
         <form onSubmit={handleSubmit}>
@@ -49,6 +49,12 @@ export default function IssueForm(props) {
                 value={description}
                 onChange={handleChange}
                 placeholder="Description"/>
+            <input
+                type="text"
+                name="imgUrl"
+                value={imgUrl}
+                onChange={handleChange}
+                placeholder="imgUrl"/>
             <button>Add Issue</button>
         </form>
     )

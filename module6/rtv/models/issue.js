@@ -12,6 +12,10 @@ const issueSchema = new Schema({
         type: String,
         required: true
     },
+
+    imgUrl: {
+        type: String
+    },
     
     votes: {
         type: Number,

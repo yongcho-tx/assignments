@@ -5,6 +5,7 @@ const commentSchema = new Schema({
     comment: {
         type: String,
         lowercase: true,
+        required: true
     },
     user: {
         type: Schema.Types.ObjectId,

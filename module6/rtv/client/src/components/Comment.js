@@ -5,7 +5,7 @@ export default function Comment (props) {
 
     return (
         <div className="comment">
-            <p>{comment }</p>
+            <p>{ comment }</p>
         </div>
     )
 }

@@ -7,7 +7,9 @@ export default function CommentList(props) {
     
     return (
         <div className="comment-list">
+            {props.children}
             { comments.map(comment => <Comment {...comment } key={comment._id}/>)}
+            
         </div>
     )
 }
