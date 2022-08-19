@@ -9,8 +9,10 @@ export default function CommentForm(props) {
     const initComment = ""
     const [comment, setComment] = useState(initComment)
     const [comments, setComments] = useState([])
-    const { addIssue, handleSubmit, handleChange, _id } = props
-    // const {addComment} = useContext(UserContext)
+    const { _id } = props
+
+    const [isOpen, setIsOpen] = useState(false)
+
 
     function addComment() {
         userAxios.post(`/api/comment/${_id}`, {comment})
@@ -30,50 +32,45 @@ export default function CommentForm(props) {
 
 
     function handleShowComments() {
-        userAxios.get(`/api/comment/${_id}`)
-        .then(res => {
-            console.log(res.data)
-            setComments(res.data)
-        })
-        .catch(err => console.log(err))
-
+        if(comments.length < 1) {
+            userAxios.get(`/api/comment/${_id}`)
+            .then(res => {
+                console.log(res.data)
+                setComments(res.data)
+            })
+            .catch(err => console.log(err))
+        }
+        setIsOpen(true)
     }
 
-    function CommentInput() {
-        return (
-            <div>
-                <form onSubmit={handleCommentSubmit}>
-                    <input
-                    type="text"
-                    name="comment"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    placeholder="comment"/>
-                    <button>Add Comment</button>
-                </form>
-                <button onClick={(() => setComments([]))}>Close Comments</button>
-            </div>
-        )
-    }
 
     return (
         <>
+            <button className="comments--button" onClick={(handleShowComments)}>Comments</button>
+            {
 
-            <button onClick={(handleShowComments)}>Comments</button>
-        {
-
-            comments.length > 0 && 
-            <>
-            <CommentInput />
-            </>
-        }                
-
-            <div>
-                <CommentList 
-                    comments={comments}
+                isOpen &&
+                <>
+                    <form onSubmit={handleCommentSubmit}>
+                        <input
+                        type="text"
+                        name="comment"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        placeholder="add comment"/>
+                        <button>Add Comment</button>
+                    </form>
                     
-                />
-            </div>
+                    <div>
+                        <CommentList 
+                            comments={comments}
+                        />
+                        <button onClick={(() => setIsOpen(false))}>Close Comments</button>
+                    </div>
+                </>
+        
+            }   
+       
         </>
     )
  }

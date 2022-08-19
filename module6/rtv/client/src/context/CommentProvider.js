@@ -1,40 +1,44 @@
-import React, {useState} from 'react'
-import axios from 'axios'
-export const CommentContext = React.createContext()
+// import React, {useState } from 'react'
+// import {userAxios} from './UserProvider'
+// const CommentContext = React.createContext()
 
 
 
-const userAxios = axios.create()
 
-userAxios.interceptors.request.use(config => {
-    const token = localStorage.getItem("token")
-    config.headers.Authorization = `Bearer ${token}`
-    return config
-})
+// function CommentProvider(props) {
+
+//     const initComment = ""
+//     const [comment, setComment] = useState(initComment)
+//     const [comments, setComments] = useState([])
+
+//     const { _id } = props
 
 
-export default function CommentProvider(props) {
-
-function addComment(newComment) {
-    userAxios.post("/api/comment", newComment)
-    .then(res => {
-        setUserState(prevState => ({
-            ...prevState,
-            comments: [...prevState.issues, res.data]
-        }))
-    })
-    .catch(err => console.log(err.response.data.errMsg))
-}
+//     function addComment() {
+//         userAxios.post(`/api/comment/${_id}`, {comment})
+//         .then(res => {
+//             setComments(prevComments => {
+//                 return [...prevComments, res.data]
+//             })
+//         })
+//         .catch(err => console.log(err.response.data.errMsg))
+//     }
 
 
 
-return (
-        <CommentContext.Provider
-            value={{
 
-                addComment
-            }}>
-            { props.children }
-        </CommentContext.Provider>
-    )
-}
+// return (
+//         <CommentContext.Provider
+//             value={{
+//                 addComment,
+//                 ...comment,
+//                 setComment,
+//                 setComments,
+//                 ...comments
+//             }}>
+//             { props.children }
+//         </CommentContext.Provider>
+//     )
+// }
+
+// export { CommentContext, CommentProvider }

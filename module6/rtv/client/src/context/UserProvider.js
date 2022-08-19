@@ -97,6 +97,7 @@ export default function UserProvider(props) {
         })
         .catch(err => console.log(err.response.data.errMsg))
     }
+
     function addComment(newComment, issueId) {
         userAxios.post(`/api/comment/${issueId}`, newComment)
         .then(res => {
@@ -109,7 +110,6 @@ export default function UserProvider(props) {
     }
 
 
-
     return (
         <UserContext.Provider
             value={{
@@ -119,8 +119,8 @@ export default function UserProvider(props) {
                 logout,
                 addIssue,
                 resetAuthErr,
-                addComment,
-                getUserIssues
+                getUserIssues,
+                setUserState
             }}>
             { props.children }
         </UserContext.Provider>

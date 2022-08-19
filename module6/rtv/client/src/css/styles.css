@@ -99,3 +99,15 @@
     padding: 8px;
     border-radius: 5px
   }
+
+  .comments--listed {
+    margin-top: 1em;
+  }
+
+  .comment--individual {
+    margin-bottom: .5em;
+  }
+
+  .comments--button {
+    margin-bottom: 1em;
+  }

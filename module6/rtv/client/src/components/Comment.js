@@ -4,7 +4,7 @@ export default function Comment (props) {
     const { comment } = props
 
     return (
-        <div className="comment">
+        <div className="comment--individual">
             <p>{ comment }</p>
         </div>
     )
