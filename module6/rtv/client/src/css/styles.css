@@ -111,3 +111,15 @@
   .comments--button {
     margin-bottom: 1em;
   }
+
+  .issue {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn--loggout {
+    background: #343434;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+  }

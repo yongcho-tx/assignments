@@ -14,7 +14,7 @@ export default function Navbar(props){
     <div className="navbar">
       <Link to="/profile" style={linkStyle}>Profile</Link>
       <Link to="/public" style={linkStyle}>Public</Link>
-      <button onClick={logout}>Logout</button>
+      <button onClick={logout} className='btn--loggout'>Logout</button>
     </div>
   )
 }

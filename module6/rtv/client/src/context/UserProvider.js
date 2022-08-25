@@ -109,6 +109,17 @@ export default function UserProvider(props) {
         .catch(err => console.log(err.response.data.errMsg))
     }
 
+    function deleteIssue(issueId) {
+        userAxios.delete(`/api/issue/${issueId}`)
+        .then((res) => {
+            console.log(res)
+            return setUserState(prevState => ({
+                ...prevState,
+                issues: [...prevState.issues.filter(issue => issue._id !== issueId)]
+            }))
+        })
+    }
+
 
     return (
         <UserContext.Provider
@@ -120,7 +131,8 @@ export default function UserProvider(props) {
                 addIssue,
                 resetAuthErr,
                 getUserIssues,
-                setUserState
+                setUserState,
+                deleteIssue
             }}>
             { props.children }
         </UserContext.Provider>
