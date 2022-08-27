@@ -111,16 +111,56 @@ export default function UserProvider(props) {
 
     function deleteIssue(issueId) {
         userAxios.delete(`/api/issue/${issueId}`)
-        .then((res) => {
+        .then(res => {
             console.log(res)
             return setUserState(prevState => ({
                 ...prevState,
                 issues: [...prevState.issues.filter(issue => issue._id !== issueId)]
             }))
         })
+        .catch(err=> console.log(err.response.data.errMsg))
     }
 
+    function editIssue(updates, issueId) {
+        userAxios.put(`/api/issue/${issueId}`, updates)
+        .then(res => {
+            setUserState(prevState => ({
+                ...prevState,
+                issues: [...prevState.issues.map(issue => issue._id !== issueId ? issue : res.data)]
+            }))
+        })
+        .catch(err=> console.log(err.response.data.errMsg))
+    }
 
+    function upVote(issueId) {
+        userAxios.put(`/api/issue/upvote/${issueId}`)
+        .then(res => {
+            console.log(res.data)
+            if(!res.data.newUpvote) {
+                return alert(`You have already upvoted`)
+            }
+            setUserState(prevState => ({
+                ...prevState,
+                issues: [...prevState.issues.map(issue => issue._id !== issueId ? issue : res.data.updatedIssue)]
+            }))
+        })
+        .catch(err=> console.log(err.response.data.errMsg))
+    }
+
+    function downVote(issueId) {
+        userAxios.put(`/api/issue/downvote/${issueId}`)
+        .then(res => {
+            console.log(res.data)
+            if(!res.data.newDownvote) {
+                return alert(`You have already downvoted`)
+            }
+            setUserState(prevState => ({
+                ...prevState,
+                issues: [...prevState.issues.map(issue => issue._id !== issueId ? issue : res.data.updatedIssue)]
+            }))
+        })
+        .catch(err=> console.log(err.response.data.errMsg))
+    }
     return (
         <UserContext.Provider
             value={{
@@ -132,7 +172,10 @@ export default function UserProvider(props) {
                 resetAuthErr,
                 getUserIssues,
                 setUserState,
-                deleteIssue
+                deleteIssue,
+                editIssue,
+                upVote,
+                downVote
             }}>
             { props.children }
         </UserContext.Provider>

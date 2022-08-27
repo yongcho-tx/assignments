@@ -27,6 +27,7 @@ export default function CommentForm(props) {
     function handleCommentSubmit(e) {
         e.preventDefault()
         addComment()
+        
     }
 
 
@@ -65,7 +66,7 @@ export default function CommentForm(props) {
                         <CommentList 
                             comments={comments}
                         />
-                        <button onClick={(() => setIsOpen(false))}>Close Comments</button>
+                        <button style={btnCloseComments} onClick={(() => setIsOpen(false))}>Close Comments</button>
                     </div>
                 </>
         
@@ -74,3 +75,10 @@ export default function CommentForm(props) {
         </>
     )
  }
+
+
+const btnCloseComments = {
+    margin: "10px",
+    padding: "5px",
+    width: "25%"
+}

@@ -67,4 +67,41 @@ issueRouter.put("/:issueId", (req, res, next) => {
   )
 })
 
+
+
+// upvote
+issueRouter.put("/upvote/:issueId", (req, res, next) => {
+  console.log(typeof req.auth._id)
+  Issue.findById(
+    req.params.issueId,
+    (err, updatedIssue) => {
+      if(err) {
+        res.status(500)
+        return next(err)
+      }
+      if(!updatedIssue) {
+        res.send("no issue found")
+        return next(err)
+      }
+      const hasUpVoted = updatedIssue.upvotes.includes(req.auth._id)
+      if(hasUpVoted) {
+        return res.status(200).send({errMsg: `The user has already voted`, newUpvote: false})
+      } else {
+        Issue.findByIdAndUpdate(req.params.issueId, { $push: { upvotes: req.auth._id }}, {new: true},
+      (err, updatedIssue) => {
+        if(err) {
+          res.status(500)
+          return next(err)
+        }
+        res.status(201).send({updatedIssue, newUpvote: true})
+      }
+    )}
+  })
+})
+
+// downvote
+issueRouter.put("/downvote/:issueId", (req, res, next) => {
+  Issue.findOneAndUpdate()
+})
+
 module.exports = issueRouter

@@ -16,19 +16,22 @@ const issueSchema = new Schema({
     imgUrl: {
         type: String
     },
-    
-    votes: {
-        type: Number,
-        default: 0
-     },
 
-     user: {
+    upvotes: [
+        String
+    ],
+        
+    downvotes: [
+        String
+    ],
+
+    user: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
      }
 
 })
-
+// issueSchema.index({ upvotes: 1, downvotes: 1 }, { unique: true});
 
 module.exports = mongoose.model("Issue", issueSchema)
