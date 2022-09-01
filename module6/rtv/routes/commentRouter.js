@@ -1,23 +1,8 @@
 const express = require("express")
 const commentRouter = express.Router()
 const Comment = require('../models/comment.js')
-const User = require('../models/user.js')
 
-
-
-// Get Comment by Issue Id
-commentRouter.get("/:issueId", (req, res, next) => {
-    Comment.find({issue: req.params.issueId },
-    (err, comments) => {
-        if (err) {
-            res.status(500)
-            return next(err)
-        }
-        return res.send(comments)
-        }
-    )
-})
-// Get All Comments
+//Get All Comments
 commentRouter.get("/", (req, res, next) => {
   Comment.find((err, comments) => {
     if(err){
@@ -27,11 +12,19 @@ commentRouter.get("/", (req, res, next) => {
     return res.status(200).send(comments)
   })
 })
-
-
-
-// Get Comments by user id
-commentRouter.get("/comment", (req, res, next) => {
+//Get Comment by Issue Id
+commentRouter.get("/:issueId", (req, res, next) => {
+  Comment.find({issue: req.params.issueId },
+  (err, comments) => {
+    if (err) {
+        res.status(500)
+        return next(err)
+    }
+    return res.send(comments)
+  })
+})
+//Get Comments by User Id ***Not working in postman***
+commentRouter.get("/user", (req, res, next) => {
   Comment.find({ user: req.auth._id }, (err, comments) => {
     if(err) {
       res.status(500)
@@ -40,13 +33,10 @@ commentRouter.get("/comment", (req, res, next) => {
     return res.status(200).send(comments)
   })
 })
-
-// Post new Comment
+//Post a New Comment
 commentRouter.post("/:issueId", (req, res, next) => {
-    
   req.body.user = req.auth._id
   let issueId = req.params.issueId
-  console.log(issueId)
   req.body.issue = issueId
   const newComment = new Comment(req.body)
   newComment.save((err, savedComment) => {
@@ -57,8 +47,7 @@ commentRouter.post("/:issueId", (req, res, next) => {
     return res.status(201).send(savedComment)
   })
 })
-
-// Delete Comment
+//Delete a Comment (must be the user who created the comment)
 commentRouter.delete("/:commentId", (req, res, next) => {
   Comment.findOneAndDelete(
     { _id: req.params.commentId, user: req.auth._id },
@@ -67,14 +56,10 @@ commentRouter.delete("/:commentId", (req, res, next) => {
         res.status(500)
         return next(err)
       }
-      return res.status(200).send(`Successfully deleted comment: ${deletedComment.commentTitle}`)
-    }
-  )
+      return res.status(200).send(`Successfully deleted comment: ${deletedComment.comment}`)
+    })
 })
-
-
-
-// Update Comment
+//Update a Comment
 commentRouter.put("/:commentId", (req, res, next) => {
   Comment.findOneAndUpdate(
     { _id: req.params.commentId, user: req.auth._id },
@@ -86,8 +71,7 @@ commentRouter.put("/:commentId", (req, res, next) => {
         return next(err)
       }
       return res.status(201).send(updatedComment)
-    }
-  )
+    })
 })
 
 module.exports = commentRouter

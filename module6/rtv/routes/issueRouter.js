@@ -12,8 +12,7 @@ issueRouter.get("/", (req, res, next) => {
     return res.status(200).send(issues)
   })
 })
-
-// Get Issues by user id
+// Get Issues by user id ***only works when user bearer token matches and does not need a separate ID since it's getting auth credentials by req.auth._id***
 issueRouter.get("/user", (req, res, next) => {
   Issue.find({ user: req.auth._id }, (err, issues) => {
     if(err) {
@@ -23,8 +22,18 @@ issueRouter.get("/user", (req, res, next) => {
     return res.status(200).send(issues)
   })
 })
-
-// Add new Issue
+//Get Issue by ID
+issueRouter.get("/:issueId", (req, res, next) => {
+  Issue.find({ _id: req.params.issueId, user: req.auth._id },
+    (err, issues) => {
+      if(err) {
+        res.status(500)
+        return next(err)
+      }
+      return res.status(200).send(issues)
+    })
+})
+// Add New Issue
 issueRouter.post("/", (req, res, next) => {
   req.body.user = req.auth._id
   const newIssue = new Issue(req.body)
@@ -36,8 +45,7 @@ issueRouter.post("/", (req, res, next) => {
     return res.status(201).send(savedIssue)
   })
 })
-
-// Delete Issue
+// Delete Issue by ID
 issueRouter.delete("/:issueId", (req, res, next) => {
   Issue.findOneAndDelete(
     { _id: req.params.issueId, user: req.auth._id },
@@ -46,11 +54,9 @@ issueRouter.delete("/:issueId", (req, res, next) => {
         res.status(500)
         return next(err)
       }
-      return res.status(200).send(`Successfully deleted issue: ${deletedIssue.issueTitle}`)
-    }
-  )
+      return res.status(200).send(`Successfully deleted issue ${deletedIssue.title}`)
+    })
 })
-
 // Update Issue
 issueRouter.put("/:issueId", (req, res, next) => {
   Issue.findOneAndUpdate(
@@ -63,12 +69,8 @@ issueRouter.put("/:issueId", (req, res, next) => {
         return next(err)
       }
       return res.status(201).send(updatedIssue)
-    }
-  )
+    })
 })
-
-
-
 // upvote
 issueRouter.put("/upvote/:issueId", (req, res, next) => {
   console.log(typeof req.auth._id)
@@ -103,5 +105,6 @@ issueRouter.put("/upvote/:issueId", (req, res, next) => {
 issueRouter.put("/downvote/:issueId", (req, res, next) => {
   Issue.findOneAndUpdate()
 })
+
 
 module.exports = issueRouter
