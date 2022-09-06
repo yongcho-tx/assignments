@@ -21,7 +21,7 @@ export default function Issue(props) {
             <p>Upvote: {upvotes.length}</p>
             <img src={UpArrow} style={{width: "36px", height: "36px"}} onClick={() => upVote(_id)}/>
             <p>Total Votes: </p>
-            <img src={DownArrow} style={{width: "36px", height: "36px"}}/>
+            <img src={DownArrow} style={{width: "36px", height: "36px"}} onClick={() => downVote(_id)}/>
             <p>Downvote: {downvotes.length} </p>
             <h4>{comment}</h4>
             <CommentForm 

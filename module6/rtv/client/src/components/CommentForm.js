@@ -27,7 +27,7 @@ export default function CommentForm(props) {
     function handleCommentSubmit(e) {
         e.preventDefault()
         addComment()
-        
+        setComment(initComment)
     }
 
 
