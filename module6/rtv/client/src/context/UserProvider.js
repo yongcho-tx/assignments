@@ -19,6 +19,7 @@ export default function UserProvider(props) {
     }
 
     const [userState, setUserState] = useState(initState)
+    const [allIssues, setAllIssues] = useState([])
 
     function signup(credentials) {
         axios.post("/auth/signup", credentials)
@@ -78,73 +79,73 @@ export default function UserProvider(props) {
 
     function addIssue(newIssue) {
         userAxios.post("/api/issue", newIssue)
-        .then(res => {
-            setUserState(prevState => ({
-                ...prevState,
-                issues: [...prevState.issues, res.data]
-            }))
-        })
-        .catch(err => console.log(err.response.data.errMsg))
+            .then(res => {
+                setUserState(prevState => ({
+                    ...prevState,
+                    issues: [...prevState.issues, res.data]
+                }))
+            })
+            .catch(err => console.log(err.response.data.errMsg))
     }
     
     function getUserIssues() {
         userAxios.get("/api/issue/user")
-        .then(res => {
-            setUserState(prevState => ({
-                ...prevState,
-                issues: res.data
-            }))
-        })
-        .catch(err => console.log(err.response.data.errMsg))
+            .then(res => {
+                setUserState(prevState => ({
+                    ...prevState,
+                    issues: res.data
+                }))
+            })
+            .catch(err => console.log(err.response.data.errMsg))
     }
 
     function addComment(newComment, issueId) {
         userAxios.post(`/api/comment/${issueId}`, newComment)
-        .then(res => {
-            setUserState(prevState => ({
-                ...prevState,
-                comments: [...prevState.issues, res.data]
-            }))
-        })
-        .catch(err => console.log(err.response.data.errMsg))
+            .then(res => {
+                setUserState(prevState => ({
+                    ...prevState,
+                    comments: [...prevState.issues, res.data]
+                }))
+            })
+            .catch(err => console.log(err.response.data.errMsg))
     }
 
     function deleteIssue(issueId) {
         userAxios.delete(`/api/issue/${issueId}`)
-        .then(res => {
-            console.log(res)
-            return setUserState(prevState => ({
-                ...prevState,
-                issues: [...prevState.issues.filter(issue => issue._id !== issueId)]
-            }))
-        })
-        .catch(err=> console.log(err.response.data.errMsg))
+            .then(res => {
+                console.log(res)
+                return setUserState(prevState => ({
+                    ...prevState,
+                    issues: [...prevState.issues.filter(issue => issue._id !== issueId)]
+                }))
+            })
+            .catch(err=> console.log(err.response.data.errMsg))
     }
 
     function editIssue(updates, issueId) {
         userAxios.put(`/api/issue/${issueId}`, updates)
-        .then(res => {
-            setUserState(prevState => ({
-                ...prevState,
-                issues: [...prevState.issues.map(issue => issue._id !== issueId ? issue : res.data)]
-            }))
-        })
-        .catch(err=> console.log(err.response.data.errMsg))
+            .then(res => {
+                setUserState(prevState => ({
+                    ...prevState,
+                    issues: [...prevState.issues.map(issue => issue._id !== issueId ? issue : res.data)]
+                }))
+            })
+            .catch(err=> console.log(err.response.data.errMsg))
     }
 
     function upVote(issueId) {
         userAxios.put(`/api/issue/upvote/${issueId}`)
-        .then(res => {
-            console.log(res.data)
-            if(!res.data.newUpvote) {
-                return alert(`You have already upvoted`)
-            }
-            setUserState(prevState => ({
-                ...prevState,
-                issues: [...prevState.issues.map(issue => issue._id !== issueId ? issue : res.data.updatedIssue)]
-            }))
-        })
-        .catch(err=> console.log(err.response.data.errMsg))
+            .then(res => {
+                console.log(res.data)
+                if(!res.data.newUpvote) {
+                    return alert(`You have already upvoted`)
+                }
+                setUserState(prevState => ({
+                    ...prevState,
+                    issues: [...prevState.issues.map(issue => issue._id !== issueId ? issue : res.data.updatedIssue)]
+                }))
+            })
+            .catch(err=> console.log(err.response.data.errMsg))
     }
 
     function downVote(issueId) {
@@ -161,6 +162,14 @@ export default function UserProvider(props) {
         })
         .catch(err=> console.log(err.response.data.errMsg))
     }
+    
+    function getAllIssues() {
+        userAxios.get(`/api/issue`)
+            .then(res => {
+                console.log(res.data)
+                setAllIssues(res.data)
+            })
+    }
     return (
         <UserContext.Provider
             value={{
@@ -175,7 +184,9 @@ export default function UserProvider(props) {
                 deleteIssue,
                 editIssue,
                 upVote,
-                downVote
+                downVote,
+                getAllIssues,
+                allIssues
             }}>
             { props.children }
         </UserContext.Provider>

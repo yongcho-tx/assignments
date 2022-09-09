@@ -58,15 +58,16 @@ export default function CommentForm(props) {
                         name="comment"
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
+                        className="comment-input"
                         placeholder="add comment"/>
-                        <button>Add Comment</button>
+                        <button className="btn-add-comment">Add Comment</button>
                     </form>
                     
                     <div>
                         <CommentList 
                             comments={comments}
                         />
-                        <button style={btnCloseComments} onClick={(() => setIsOpen(false))}>Close Comments</button>
+                        <button className="btn-close-comment" onClick={(() => setIsOpen(false))}>Close Comments</button>
                     </div>
                 </>
         
@@ -75,10 +76,3 @@ export default function CommentForm(props) {
         </>
     )
  }
-
-
-const btnCloseComments = {
-    margin: "10px",
-    padding: "5px",
-    width: "25%"
-}

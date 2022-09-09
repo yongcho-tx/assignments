@@ -5,7 +5,6 @@ const issueSchema = new Schema({
     title: {
         type: String,
         required: true
-
     },
 
     description: {
@@ -30,7 +29,6 @@ const issueSchema = new Schema({
         ref: "User",
         required: true
      }
-
 })
 // issueSchema.index({ upvotes: 1, downvotes: 1 }, { unique: true});
 

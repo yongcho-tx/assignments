@@ -20,7 +20,6 @@
     background-color: #343434;
   }
   
-
   .auth-container {
     display: flex;
     align-items: center;
@@ -60,7 +59,6 @@
     border-radius: 4px;
   }
 
-  
   .public {
     height: 100vh;
   }
@@ -73,7 +71,7 @@
   }
   
   .profile > h1 {
-    margin: 8px;
+    margin: 30px;
     font-size: 2em;
     text-align: center;
   }
@@ -109,7 +107,9 @@
   }
 
   .comments--button {
-    margin-bottom: 1em;
+    margin: 1em 0;
+    width: 80%;
+    padding: 10px
   }
 
   .issue {
@@ -123,3 +123,24 @@
     border: none;
     cursor: pointer;
   }
+
+  .btn--loggout:hover {
+    background-color: #ffffff;
+    color: black;
+  }
+
+  .btn-add-comment {
+    width: 80%;
+    margin: 5px 0;
+  }
+
+  .btn-close-comment {
+    margin: 10px 0;
+    padding: 5px;
+    width: 80%;
+}
+
+.comment-input {
+  width: 80%;
+  padding: 10px;
+}
