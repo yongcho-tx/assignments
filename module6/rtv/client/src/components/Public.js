@@ -5,14 +5,14 @@ import IssueCard from './IssueCard.js'
 
 export default function Public (props) {
 
-  const { getAllIssues, allIssues, deleteIssue, user: { username } } = useContext(UserContext)
+  const { getAllIssues, allIssues, deleteIssue, user: { username }, issues } = useContext(UserContext)
   const publicIssues = allIssues.map(issue => <IssueCard {...issue} key={issue._id}/>)
   const { downvotesCount, upvotesCount } = props
 
   useEffect(() => {
     console.log('use effect ran')
     getAllIssues()
-  }, [downvotesCount + upvotesCount])
+  }, [downvotesCount + upvotesCount, issues])
 
   return (
     <div className="public">

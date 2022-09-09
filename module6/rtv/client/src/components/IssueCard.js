@@ -7,7 +7,7 @@ import {userAxios} from '../context/UserProvider'
 
 export default function Issue(props) {
     const { title, description, _id, comment, imgUrl, upvotes, downvotes} = props
-    const { deleteIssue, editIssue, getUserIssues } = useContext(UserContext)
+    const { deleteIssue, editIssue, getUserIssues, allIssues } = useContext(UserContext)
 
     const [upvotesCount, setUpvotesCount] = useState(upvotes.length)
     const [downvotesCount, setDownvotesCount] = useState(downvotes.length)
@@ -53,6 +53,7 @@ export default function Issue(props) {
             <p>Downvote: {downvotesCount} </p>
             <h4>{comment}</h4>
             <CommentForm _id={_id}/>
+            {/* <p>Issue posted by: {allIssues.map(issue => console.log(issue))} </p> */}
         </div>
     )
 }
