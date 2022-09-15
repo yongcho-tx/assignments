@@ -1,0 +1,38 @@
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import SearchMeds from './components/SearchMeds.js'
+import DrugInteractions from './components/DrugInteractions.js'
+import Home from './components/Home.js'
+import styled from 'styled-components'
+
+
+const AppContainer = styled.div`
+  width: 100%;
+  height; 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 8em;
+`
+
+function App() {
+  return (
+    <AppContainer>
+      <Routes>
+        <Route
+          path="/"
+          element={ <Home />}
+        />
+        <Route 
+          path="/search"
+          element={ <SearchMeds />}
+        />
+        <Route 
+          path="/interations"
+          element={ <DrugInteractions /> }
+        />
+      </Routes>
+    </AppContainer>
+  );
+}
+
+export default App;
