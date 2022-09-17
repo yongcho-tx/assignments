@@ -1,6 +1,4 @@
 import React from 'react'
-import SearchMeds from './SearchMeds'
-
 
 function SelectedMedsList(props) {
     const { selectedMeds } = props
@@ -16,10 +14,15 @@ function SelectedMedsList(props) {
         }
         return false
     })
-    console.log(uniqueSelectedMeds)
+    console.log("unique selection: ", uniqueSelectedMeds)
     return (
         
         <div>
+            <div>
+                { uniqueSelectedMeds.length > 0 &&
+                <h1>My Meds List</h1>
+                }
+            </div>
             { uniqueSelectedMeds.map(med => {
                 return (
                     <div key={med.rxcui}>

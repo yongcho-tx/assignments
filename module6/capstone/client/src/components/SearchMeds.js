@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import styled, { keyframes } from 'styled-components'
 import {IoSearch, IoClose } from 'react-icons/io5'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useClickOutside } from 'react-click-outside-hook'
 import MoonLoader from 'react-spinners/MoonLoader'
-import { useDebounce } from '../hooks/debounceHook'
-import axios from 'axios'
 import { MedName } from './MedName'
 import SelectedMedsList from './SelectedMedsList'
+import { DrugContext } from '../context/DrugProvider' 
 
 const SearchBarContainer = styled(motion.div)`
     display: flex;
@@ -117,16 +116,13 @@ const containerTransistion = {
 
 
 function SearchMeds(props) {
-    const [isExpanded, setExpanded] = useState(false)
-    const [parentRef, isClickedOutside] = useClickOutside()
-    const inputRef = useRef()
-    const [searchQuery, setSearchQuery] = useState("")
-    const [isLoading, setLoading] = useState(false)
-    const [medNames, setMedNames] = useState([])
-    const [noMedNames, setNoMedNames] = useState(false)
-    const [selectedMeds, setSelectedMeds] = useState([])
 
+    const { searchQuery, setSearchQuery, selectedMeds, setSelectedMeds, noMedNames, setNoMedNames, medNames, setMedNames, isLoading, setLoading, addMedList } = useContext(DrugContext)
     const isEmpty = !medNames || medNames.length === 0
+    const [parentRef, isClickedOutside] = useClickOutside()
+    const [isExpanded, setExpanded] = useState(false)
+    const inputRef = useRef()
+
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -146,52 +142,38 @@ function SearchMeds(props) {
         setLoading(false)
     }
 
-    const addMedList = (meds) => {
-        const myMedList = [...selectedMeds, meds]
-        // const uniqueMedList = myMedList.filter((v, i, s) => s.indexOf(v) === i)
-        const uniqueArr = [...new Set(myMedList)]
-        setSelectedMeds(uniqueArr)
-    }
+    // const addMedList = (meds) => {
+    //     const myMedList = [...selectedMeds, meds]
+    //     setSelectedMeds(myMedList)
+    // }
+
+    // const addMedList = (newMeds) => {
+    //     axios.post("/rxlist", newMeds)
+    //     .then(res => {
+    //         console.log("i am res.data:", res.data)
+    //         setSelectedMeds(prevState => {
+    //             return [...prevState, res.data]
+    //         })
+    //     })
+    //     .catch(err => console.log(err.response.data.errMsg))
+    //     console.log("line 166:", selectedMeds)
+    // }
+
+
+    // const getSelectedMeds = () => {
+    //     axios.get(`/rxlist`)
+    //         .then(res => {
+    //             console.log(res.data)
+    //             setSelectedMeds(res.data)
+    //         })
+    //         .catch(err => console.log(err.response.data.errMsg))
+    // }
 
     useEffect(() => {
         if (isClickedOutside)
         collapseContainer()
     }, [isClickedOutside])
-
-
-    const prepareSearchQuery = (query) => {
-        const url = `https://rxnav.nlm.nih.gov/REST/drugs.json?name=${query}`
-
-        return encodeURI(url)
-    }
-
-
-    const searchMedName= async () => {
-        if(!searchQuery || searchQuery.trim() === "") return
-
-        setLoading(true)
-        setNoMedNames(false)
-
-        const URL = prepareSearchQuery(searchQuery)
-
-        const res = await axios.get(URL).catch((err) => {
-            console.log("Error: ", err)
-        })
-
-        if(res) {
-            console.log("Response: res.data", res.data)
-            console.log("object length: ", Object.keys(res.data.drugGroup).length)
-            // console.log("drugGroup: ", res.data.drugGroup.conceptGroup[res.data.drugGroup.conceptGroup.length-1].conceptProperties)
-            Object.keys(res.data.drugGroup).length >= 2 ? setMedNames(res.data.drugGroup.conceptGroup[res.data.drugGroup.conceptGroup.length-1].conceptProperties)
-            : setNoMedNames(true)
-            }
-        setLoading(false)
-    }
-
-    //this prevents the each keystroke of every keyword in the search
-    useDebounce(searchQuery, 750, searchMedName)
-   
-    // console.log("Value: ", searchQuery)
+  
 
     return (
         <div>

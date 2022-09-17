@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import SearchMeds from './components/SearchMeds.js'
 import DrugInteractions from './components/DrugInteractions.js'
 import Home from './components/Home.js'
+import Profile from './components/Profile.js'
 import styled from 'styled-components'
 
 
@@ -29,6 +30,10 @@ function App() {
         <Route 
           path="/interations"
           element={ <DrugInteractions /> }
+        />
+        <Route 
+          path="/profile"
+          element={ <Profile /> }
         />
       </Routes>
     </AppContainer>
