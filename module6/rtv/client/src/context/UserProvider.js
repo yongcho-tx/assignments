@@ -9,7 +9,7 @@ userAxios.interceptors.request.use(config => {
     return config
 })
 
-export default function UserProvider(props) {
+const UserProvider = (props) => {
     const initState = { 
         user: JSON.parse(localStorage.getItem("user")) || {}, 
         token: localStorage.getItem("token") || "",
@@ -21,7 +21,7 @@ export default function UserProvider(props) {
     const [userState, setUserState] = useState(initState)
     const [allIssues, setAllIssues] = useState([])
 
-    function signup(credentials) {
+    const signup = (credentials) => {
         axios.post("/auth/signup", credentials)
             .then(res => {
                 const { user, token } = res.data
@@ -36,7 +36,7 @@ export default function UserProvider(props) {
             .catch(err => handleAuthErr(err.response.data.errMsg))
         }
 
-    function login(credentials) {
+    const login = (credentials) => {
         axios.post("/auth/login", credentials)
             .then(res => {
                 const { user, token } = res.data
@@ -52,7 +52,7 @@ export default function UserProvider(props) {
         .catch(err => handleAuthErr(err.response.data.errMsg))
     }
 
-    function logout() {
+    const logout = () => {
         localStorage.removeItem("token")
         localStorage.removeItem("user")
         setUserState({
@@ -62,22 +62,21 @@ export default function UserProvider(props) {
         })
     }
 
-    function handleAuthErr(errMsg) {
+    const handleAuthErr = (errMsg) => {
         setUserState(prevState => ({
             ...prevState,
             errMsg
         }))
     }
 
-    function resetAuthErr() {
+    const resetAuthErr = () => {
         setUserState(prevState => ({
             ...prevState,
             errMsg: ""
         }))
     }
 
-
-    function addIssue(newIssue) {
+    const addIssue = (newIssue) => {
         userAxios.post("/api/issue", newIssue)
             .then(res => {
                 setUserState(prevState => ({
@@ -88,7 +87,7 @@ export default function UserProvider(props) {
             .catch(err => console.log(err.response.data.errMsg))
     }
     
-    function getUserIssues() {
+    const getUserIssues = () => {
         userAxios.get("/api/issue/user")
             .then(res => {
                 setUserState(prevState => ({
@@ -99,18 +98,7 @@ export default function UserProvider(props) {
             .catch(err => console.log(err.response.data.errMsg))
     }
 
-    function addComment(newComment, issueId) {
-        userAxios.post(`/api/comment/${issueId}`, newComment)
-            .then(res => {
-                setUserState(prevState => ({
-                    ...prevState,
-                    comments: [...prevState.issues, res.data]
-                }))
-            })
-            .catch(err => console.log(err.response.data.errMsg))
-    }
-
-    function deleteIssue(issueId) {
+    const deleteIssue = (issueId) => {
         userAxios.delete(`/api/issue/${issueId}`)
             .then(res => {
                 console.log(issueId)
@@ -125,7 +113,7 @@ export default function UserProvider(props) {
             .catch(err=> console.log(err.response.data.errMsg))
     }
 
-    function editIssue(updates, issueId) {
+    const editIssue = (updates, issueId) => {
         userAxios.put(`/api/issue/${issueId}`, updates)
             .then(res => {
                 setUserState(prevState => ({
@@ -136,7 +124,7 @@ export default function UserProvider(props) {
             .catch(err=> console.log(err.response.data.errMsg))
     }
 
-    function upVote(issueId) {
+    const upVote = (issueId) => {
         userAxios.put(`/api/issue/upvote/${issueId}`)
             .then(res => {
                 console.log(res.data)
@@ -151,7 +139,7 @@ export default function UserProvider(props) {
             .catch(err=> console.log(err.response.data.errMsg))
     }
 
-    function downVote(issueId) {
+    const downVote = (issueId) => {
         userAxios.put(`/api/issue/downvote/${issueId}`)
         .then(res => {
             console.log(res.data)
@@ -166,13 +154,14 @@ export default function UserProvider(props) {
         .catch(err=> console.log(err.response.data.errMsg))
     }
     
-    function getAllIssues() {
+    const getAllIssues = () => {
         userAxios.get(`/api/issue`)
             .then(res => {
                 console.log(res.data)
                 setAllIssues(res.data)
             })
     }
+
     return (
         <UserContext.Provider
             value={{
@@ -195,3 +184,5 @@ export default function UserProvider(props) {
         </UserContext.Provider>
     )
 }
+
+export default UserProvider

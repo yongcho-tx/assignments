@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Comment from './Comment.js'
 
-export default function CommentList(props) {
+const CommentList = (props) => {
 
     const { comments } = props
     
     return (
         <div className="comments--listed">
-            {/* {console.log(comments)} */}
-            {/* {props.children} */}
+            { console.log(props)}
             { comments.map(comment => <Comment {...comment } key={comment._id}/>)}
-            
         </div>
     )
 }
 
+export default CommentList

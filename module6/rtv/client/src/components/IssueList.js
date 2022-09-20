@@ -1,18 +1,15 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import IssueCard from './IssueCard.js'
-import UserProvider, { UserContext } from '../context/UserProvider.js'
 
-
-export default function IssueList(props) {
+const IssueList = (props) => {
 
     const { issues } = props
-    const { editIssue } = useContext(UserContext)
     
     return (
         <div className="issue-list">
-            { issues.map(issue => <IssueCard {...issue} key={issue._id} editIssue={editIssue}/>)}
-           
+            { issues.map(issue => <IssueCard {...issue} key={issue._id}/>)}
         </div>
     )
 }
 
+export default IssueList

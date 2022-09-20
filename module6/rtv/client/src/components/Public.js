@@ -3,7 +3,7 @@ import {UserContext} from '../context/UserProvider.js'
 import IssueCard from './IssueCard.js'
 
 
-export default function Public (props) {
+const Public = (props) => {
 
   const { getAllIssues, allIssues, deleteIssue, user: { username }, issues } = useContext(UserContext)
   const publicIssues = allIssues.map(issue => <IssueCard {...issue} key={issue._id}/>)
@@ -41,3 +41,5 @@ const userHeadingStyle = {
   textAlign: "center",
   fontSize: "18px"
 }
+
+export default Public

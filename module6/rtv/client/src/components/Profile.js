@@ -4,14 +4,18 @@ import IssueForm from './IssueForm.js'
 import IssueList from './IssueList.js'
 
 
-export default function Profile(){
+const Profile = () => {
+
   const { user: { username }, addIssue, issues } = useContext(UserContext)
-console.log(issues)
+  console.log(issues)
   return (
     <div className="profile">
       <h1>Welcome @{username}!</h1>
       <h3>Add an Issue</h3>
-      <IssueForm addIssue={addIssue}/>
+      <IssueForm 
+          btnText="Add Issue"
+          submit={addIssue}
+        />
       {
         issues.length < 1 ?
         <>
@@ -27,3 +31,5 @@ console.log(issues)
     </div>
   )
 }
+
+export default Profile

@@ -1,38 +1,35 @@
-import React, { useState, useContext, useEffect } from 'react'
-import UserProvider, { UserContext } from '../context/UserProvider.js'
+import React, { useState } from 'react'
 import CommentList from './CommentList.js'
-import Comment from './Comment.js'
 import {userAxios} from '../context/UserProvider'
 
-export default function CommentForm(props) {
+const CommentForm = (props) => {
 
     const initComment = ""
     const [comment, setComment] = useState(initComment)
     const [comments, setComments] = useState([])
+    const [isOpen, setIsOpen] = useState(false)
     const { _id } = props
 
-    const [isOpen, setIsOpen] = useState(false)
 
-
-    function addComment() {
+    const addComment = () => {
         userAxios.post(`/api/comment/${_id}`, {comment})
         .then(res => {
             setComments(prevComments => {
                 return [...prevComments, res.data]
             })
+            console.log("this is line 23 of comments: ", comments)
+            console.log("this is line 24 of comments: ", res.data)
         })
         .catch(err => console.log(err.response.data.errMsg))
     }
 
-    function handleCommentSubmit(e) {
+    const handleCommentSubmit = (e) => {
         e.preventDefault()
         addComment()
         setComment(initComment)
     }
 
-
-
-    function handleShowComments() {
+    const handleShowComments = () => {
         if(comments.length < 1) {
             userAxios.get(`/api/comment/${_id}`)
             .then(res => {
@@ -43,7 +40,6 @@ export default function CommentForm(props) {
         }
         setIsOpen(true)
     }
-
 
     return (
         <>
@@ -76,3 +72,5 @@ export default function CommentForm(props) {
         </>
     )
  }
+
+ export default CommentForm

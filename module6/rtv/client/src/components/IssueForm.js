@@ -1,22 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react'
-import {userAxios} from '../context/UserProvider'
-import UserProvider, { UserContext } from '../context/UserProvider.js'
+import { UserContext } from '../context/UserProvider.js'
+
+
+const IssueForm = (props) => {
+
 
 const initInputs = {
-    title: "",
-    description: "",
-    imgUrl: ""
+    title: props.title || "",
+    description: props.description || "",
+    imgUrl: props.imgUrl || ""
 }
-
-export default function IssueForm(props) {
-
     const [inputs, setInputs] = useState(initInputs)
-    const { addIssue } = props
-    const {getUserIssues} = React.useContext(UserContext)
+    const { btnText, _id, submit, handleClose } = props
+    const { getUserIssues } = useContext(UserContext)
 
     useEffect(() => { 
         getUserIssues()
-        
     }, [])
 
     function handleChange(e) {
@@ -28,8 +27,10 @@ export default function IssueForm(props) {
     }
     function handleSubmit(e) {
         e.preventDefault()
-        addIssue(inputs)
+        // addIssue(inputs)
+        submit(inputs, _id)
         setInputs(initInputs)
+        handleClose && handleClose(false)
     }
 
  
@@ -55,7 +56,9 @@ export default function IssueForm(props) {
                 value={imgUrl}
                 onChange={handleChange}
                 placeholder="imgUrl"/>
-            <button>Add Issue</button>
+            <button> { btnText } </button>
         </form>
     )
  }
+ 
+ export default IssueForm
