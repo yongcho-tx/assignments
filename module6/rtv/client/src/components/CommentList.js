@@ -7,7 +7,6 @@ const CommentList = (props) => {
     
     return (
         <div className="comments--listed">
-            { console.log(props)}
             { comments.map(comment => <Comment {...comment } key={comment._id}/>)}
         </div>
     )

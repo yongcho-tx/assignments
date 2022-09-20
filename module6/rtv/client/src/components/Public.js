@@ -25,6 +25,8 @@ const Public = (props) => {
   )
 }
 
+export default Public
+
 const publicIssueStyle = {
   alignItems: "center",
   display: "flex",
@@ -42,4 +44,3 @@ const userHeadingStyle = {
   fontSize: "18px"
 }
 
-export default Public
