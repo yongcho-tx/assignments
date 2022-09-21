@@ -1,11 +1,12 @@
 import React, { useEffect, useContext } from 'react'
 import { DrugContext } from '../context/DrugProvider.js'
 import SelectedMedsList from './SelectedMedsList.js'
+import SearchMeds from './SearchMeds.js'
 
 export default function Profile(props) {
 
-    const { getMedList, selectedMeds } = useContext(DrugContext)
-    // const mySelectedMedList = selectedMeds.map(med => <MedName {...med} key={med._id} />)
+    const { getMedList, selectedMeds, searchQuery2 } = useContext(DrugContext)
+
 
 
     useEffect(() => {
@@ -14,11 +15,25 @@ export default function Profile(props) {
     }, [])
 
 
+    const rxcuiCollection = selectedMeds.map((med, i) => {
+        let newArr = ""
+        for (i = 0; i < med.length-1; i++) {
+            newArr += med[i] + "+"
+            
+        }
+    })
+    console.log(rxcuiCollection)
+
+    console.log("selectedMeds map: ", selectedMeds.map(drug => drug.rxcui+"+"))
+    console.log(rxcuiCollection)
     return (
     
+
         <div>
-           {/* {selectedMeds.map(med => <MedName name={med.name} key={med._id} />)} */}
            <SelectedMedsList />
+           <div>
+                {selectedMeds.map((med) => med.rxcui+"+")}
+           </div>
         </div>
     )
 }

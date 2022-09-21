@@ -19,8 +19,9 @@ const AppContainer = styled.div`
 function App() {
   return (
     <div>
+      <Navbar />
       <AppContainer>
-        <Navbar />
+        
         <Routes>
           <Route
             path="/"

@@ -6,6 +6,7 @@ export const DrugContext = React.createContext()
 function DrugProvider(props) {
 
     const [searchQuery, setSearchQuery] = useState("")
+    const [searchQuery2, setSearchQuery2] = useState("")
     const [noMedNames, setNoMedNames] = useState(false)
     const [medNames, setMedNames] = useState([])
     const [selectedMeds, setSelectedMeds] = useState([])
@@ -18,8 +19,11 @@ function DrugProvider(props) {
         return encodeURI(url)
     }
 
+    const prepareCrossInteraction = (query) => {
+        const url = `https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=${query}`
+    }
 
-    const searchMedName= async () => {
+    const searchMedName = async () => {
         if(!searchQuery || searchQuery.trim() === "") return
 
         setLoading(true)
@@ -40,6 +44,22 @@ function DrugProvider(props) {
             }
         setLoading(false)
     }
+
+    const searchCrossInteraction = () => {
+        if(!searchQuery2 || searchQuery2.trim() === "") return
+
+        setLoading(true)
+        setNoMedNames(false)
+
+        const URL = prepareCrossInteraction(searchQuery2)
+
+        axios.get(URL)
+            .then(res => {
+                console.log(res.data)
+            })
+            setLoading(false)
+            .catch(err => console.log(err))
+        }
 
     const addMedList = (newMeds) => {
         axios.post("/rxlist", newMeds)
@@ -81,7 +101,8 @@ function DrugProvider(props) {
                 isLoading,
                 setLoading,
                 addMedList,
-                getMedList
+                getMedList,
+                searchQuery2
             }}
         >
             {props.children}

@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 const rxListSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     tty: {
         type: String,
@@ -12,7 +13,8 @@ const rxListSchema = new Schema({
     },
     rxcui: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     }
 
 })

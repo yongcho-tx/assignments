@@ -12,12 +12,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 3em;
+    height: 5em;
     background-color: #343434;
-  }
-
-  .link {
-    margin: "1em";
-    text-decoration: "none";
-    color: white
   }
