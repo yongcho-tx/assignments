@@ -47,7 +47,8 @@ function DrugProvider(props) {
             console.log("i am res.data:", res.data)
             // const myMedList = [...selectedMeds, newMeds]
             setSelectedMeds(prevState => {
-                return [...prevState, res.data]
+                console.log("Saved into setSelectedMeds", res.data)
+                return [...prevState, newMeds]
             })
             //if res.data in put in, the data delay of 1 is visible for selectedMeds; newMeds is direct
         })
@@ -57,6 +58,14 @@ function DrugProvider(props) {
     //this prevents the each keystroke of every keyword in the search
     useDebounce(searchQuery, 750, searchMedName)
    
+    const getMedList = () => {
+        axios.get("/rxlist" )
+        .then(res => {
+            setSelectedMeds(res.data)
+        })
+        .catch(err => console.log(err.respojnse.data.errMsg))
+    }
+
 
 
     return (
@@ -71,7 +80,8 @@ function DrugProvider(props) {
                 selectedMeds,
                 isLoading,
                 setLoading,
-                addMedList
+                addMedList,
+                getMedList
             }}
         >
             {props.children}

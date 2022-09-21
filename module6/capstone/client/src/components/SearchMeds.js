@@ -4,7 +4,7 @@ import {IoSearch, IoClose } from 'react-icons/io5'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useClickOutside } from 'react-click-outside-hook'
 import MoonLoader from 'react-spinners/MoonLoader'
-import { MedName } from './MedName'
+import MedName from './MedName'
 import SelectedMedsList from './SelectedMedsList'
 import { DrugContext } from '../context/DrugProvider' 
 
@@ -246,7 +246,7 @@ function SearchMeds(props) {
                         {/* <div>
                             {selectedMeds.map(med => <div>{med.name}</div>)}
                         </div> */}
-                        <SelectedMedsList selectedMeds={selectedMeds}/>
+                        <SelectedMedsList />
                 
                 </>
         </div>

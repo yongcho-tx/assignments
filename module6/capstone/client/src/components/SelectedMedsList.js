@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import {DrugContext} from '../context/DrugProvider'
 
 function SelectedMedsList(props) {
-    const { selectedMeds } = props
+    const { selectedMeds } = useContext(DrugContext)
     console.log("selectedMeds console: ", selectedMeds)
     // const selectedMedArr = selectedMeds.map(med => <h3 key={med.rxcui} {...med}>Name: {med.name} Rxcui: {med.rxcui} </h3>)
     const uniqueRxcui = []

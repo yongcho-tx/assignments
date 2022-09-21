@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { MedName } from './MedName.js'
+import React, { useEffect, useContext } from 'react'
+import { DrugContext } from '../context/DrugProvider.js'
+import SelectedMedsList from './SelectedMedsList.js'
 
 export default function Profile(props) {
-    const { selectedMeds, setSelectedMeds, getSelectedMeds } = props
-    // const mySelectedMedList = selectedMeds.map(med => <SelectedMedsList {...med} key={med._id}/>)
 
-    // useEffect(() => {
-    //     console.log('useeffect ran')
-    //     getSelectedMeds()
-    // }, [])
+    const { getMedList, selectedMeds } = useContext(DrugContext)
+    // const mySelectedMedList = selectedMeds.map(med => <MedName {...med} key={med._id} />)
 
-    console.log("new console.log:", selectedMeds)
+
+    useEffect(() => {
+        console.log('useeffect ran')
+        getMedList()
+    }, [])
+
 
     return (
     
         <div>
-            <MedName />
+           {/* {selectedMeds.map(med => <MedName name={med.name} key={med._id} />)} */}
+           <SelectedMedsList />
         </div>
     )
 }

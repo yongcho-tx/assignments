@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
+import { DrugContext } from '../context/DrugProvider'
 
 const MedNameContainer = styled.div`
     width: 100%;
@@ -34,9 +35,9 @@ const Rxcui = styled.span`
     flex: 1;
     margin: 1em 2.5em 1em 1em;
 `
-
-export function MedName(props) {
-    const { tty, name, rxcui, handleAddMedList, selectedMeds  } = props
+function MedName(props) {
+    const { tty, name, rxcui, handleAddMedList } = props
+    // const { selectedMeds } = useContext(DrugContext)
     const [isSelected, setSelected] = useState(false)
 
     return (
@@ -49,3 +50,5 @@ export function MedName(props) {
         </div>
     )
 }
+
+export default MedName

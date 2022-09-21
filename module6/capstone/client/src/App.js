@@ -5,6 +5,7 @@ import DrugInteractions from './components/DrugInteractions.js'
 import Home from './components/Home.js'
 import Profile from './components/Profile.js'
 import styled from 'styled-components'
+import Navbar from './components/Navbar.js'
 
 
 const AppContainer = styled.div`
@@ -17,26 +18,29 @@ const AppContainer = styled.div`
 
 function App() {
   return (
-    <AppContainer>
-      <Routes>
-        <Route
-          path="/"
-          element={ <Home />}
-        />
-        <Route 
-          path="/search"
-          element={ <SearchMeds />}
-        />
-        <Route 
-          path="/interations"
-          element={ <DrugInteractions /> }
-        />
-        <Route 
-          path="/profile"
-          element={ <Profile /> }
-        />
-      </Routes>
-    </AppContainer>
+    <div>
+      <AppContainer>
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={ <Home />}
+          />
+          <Route 
+            path="/search"
+            element={ <SearchMeds />}
+          />
+          <Route 
+            path="/interations"
+            element={ <DrugInteractions /> }
+          />
+          <Route 
+            path="/profile"
+            element={ <Profile /> }
+          />
+        </Routes>
+      </AppContainer>
+    </div>
   );
 }
 
