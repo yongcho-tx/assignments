@@ -36,9 +36,8 @@ const Rxcui = styled.span`
     margin: 1em 2.5em 1em 1em;
 `
 function MedName(props) {
+    
     const { tty, name, rxcui, handleAddMedList } = props
-    // const { selectedMeds } = useContext(DrugContext)
-    const [isSelected, setSelected] = useState(false)
 
     return (
         <div>

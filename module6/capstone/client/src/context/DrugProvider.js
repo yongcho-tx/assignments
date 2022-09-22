@@ -11,6 +11,7 @@ function DrugProvider(props) {
     const [medNames, setMedNames] = useState([])
     const [selectedMeds, setSelectedMeds] = useState([])
     const [isLoading, setLoading] = useState(false)
+    const [interactions, setInteractions] = useState([])
 
 
 
@@ -21,6 +22,7 @@ function DrugProvider(props) {
 
     const prepareCrossInteraction = (query) => {
         const url = `https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=${query}`
+        return encodeURI(url)
     }
 
     const searchMedName = async () => {
@@ -36,8 +38,8 @@ function DrugProvider(props) {
         })
 
         if(res) {
-            console.log("Response: res.data", res.data)
-            console.log("object length: ", Object.keys(res.data.drugGroup).length)
+            // console.log("Response: res.data", res.data)
+            // console.log("object length: ", Object.keys(res.data.drugGroup).length)
             // console.log("drugGroup: ", res.data.drugGroup.conceptGroup[res.data.drugGroup.conceptGroup.length-1].conceptProperties)
             Object.keys(res.data.drugGroup).length >= 2 ? setMedNames(res.data.drugGroup.conceptGroup[res.data.drugGroup.conceptGroup.length-1].conceptProperties)
             : setNoMedNames(true)
@@ -45,7 +47,7 @@ function DrugProvider(props) {
         setLoading(false)
     }
 
-    const searchCrossInteraction = () => {
+    const searchCrossInteraction = async () => {
         if(!searchQuery2 || searchQuery2.trim() === "") return
 
         setLoading(true)
@@ -53,13 +55,17 @@ function DrugProvider(props) {
 
         const URL = prepareCrossInteraction(searchQuery2)
 
-        axios.get(URL)
-            .then(res => {
-                console.log(res.data)
-            })
-            setLoading(false)
-            .catch(err => console.log(err))
-        }
+        const res = await axios.get(URL).catch((err) => {
+            console.log("Error: ", err)
+        })
+
+        if(res) {
+            const interactionData = res.data.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description
+            console.log("Interaction: ", interactionData)
+            setInteractions(interactionData)
+            }
+        setLoading(false)
+    }
 
     const addMedList = (newMeds) => {
         axios.post("/rxlist", newMeds)
@@ -77,6 +83,7 @@ function DrugProvider(props) {
     }
     //this prevents the each keystroke of every keyword in the search
     useDebounce(searchQuery, 750, searchMedName)
+    useDebounce(searchQuery2, 750, searchCrossInteraction)
    
     const getMedList = () => {
         axios.get("/rxlist" )
@@ -102,7 +109,10 @@ function DrugProvider(props) {
                 setLoading,
                 addMedList,
                 getMedList,
-                searchQuery2
+                searchQuery2,
+                setSearchQuery2,
+                setInteractions,
+                interactions
             }}
         >
             {props.children}
