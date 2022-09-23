@@ -48,8 +48,8 @@ function DrugProvider(props) {
     }
 
     const searchCrossInteraction = async () => {
-        if(!searchQuery2 || searchQuery2.trim() === "") return
 
+        if(!searchQuery2 || searchQuery2.trim() === "") return
         setLoading(true)
         setNoMedNames(false)
 
@@ -65,6 +65,11 @@ function DrugProvider(props) {
             setInteractions(interactionData)
             }
         setLoading(false)
+    }
+
+    const checkInteraction = () => {
+        const rxcuis = selectedMeds.map(med => med.rxcui).join("+")
+        searchCrossInteraction(rxcuis)
     }
 
     const addMedList = (newMeds) => {
@@ -93,7 +98,15 @@ function DrugProvider(props) {
         .catch(err => console.log(err.respojnse.data.errMsg))
     }
 
-
+    const deleteMedList = (medId) => {
+        axios.delete(`/rxlist/${medId}`)
+            .then(res => {
+                console.log(medId)
+                console.log(selectedMeds.filter(med => med._id !== medId))
+                setSelectedMeds(prevState => prevState.filter(med => med._id !== medId))
+            })
+            .catch(err => console.log(err.response.data.errMsg))
+    }
 
     return (
         <DrugContext.Provider
@@ -112,7 +125,10 @@ function DrugProvider(props) {
                 searchQuery2,
                 setSearchQuery2,
                 setInteractions,
-                interactions
+                interactions,
+                deleteMedList,
+                searchCrossInteraction,
+                checkInteraction
             }}
         >
             {props.children}

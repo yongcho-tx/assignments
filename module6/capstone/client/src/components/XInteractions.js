@@ -6,7 +6,7 @@ export default function XInteractions(props) {
     const { interactions } = useContext(DrugContext)
     return (
         <div>
-            <h4>Interaction Description: { interactions } </h4>
+            <h1>Interaction Description: { interactions } </h1>
         </div>
     )
 }

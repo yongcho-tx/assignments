@@ -11,6 +11,140 @@ import MedName from './MedName'
 import XInteractions from './XInteractions.js'
 
 
+export default function Profile(props) {
+
+    const { searchQuery2, searchCrossInteraction, deleteMedList, setInteractions, interactions, getMedList, setSearchQuery2, selectedMeds, setSelectedMeds, noMedNames, setNoMedNames, medNames, setMedNames, isLoading, setLoading, addMedList } = useContext(DrugContext)
+    const isEmpty = !medNames || medNames.length === 0
+    const [parentRef, isClickedOutside] = useClickOutside()
+    const [isExpanded, setExpanded] = useState(false)
+    const inputRef = useRef()
+
+
+    const handleChange = (e) => {
+        e.preventDefault()
+        if(e.target.value.trim() === "") setNoMedNames(false)
+        setSearchQuery2(e.target.value)
+    }
+
+    const expandContainer = () => {
+        setExpanded(true)
+    }
+
+    const collapseContainer = () => {
+        setExpanded(false)
+        setSearchQuery2("")
+        setInteractions([])
+        setNoMedNames(false)
+        if(inputRef.current) inputRef.current.value = ""
+        setLoading(false)
+    }
+
+    const insertRxcui = () => {
+        setExpanded(true)
+        inputRef.current.value = selectedMeds.map((med) => med.rxcui).join("+")
+        
+    }
+
+    useEffect(() => {
+        if (isClickedOutside)
+        collapseContainer()
+    }, [isClickedOutside])
+  
+    useEffect(() => {
+        console.log('useeffect ran')
+        getMedList()
+    }, [])
+
+
+    return (
+        <div>
+            <SearchBarContainer 
+                animate={isExpanded ? "expanded" : "collapsed"}
+                variants={containerVariants}
+                transition={containerTransistion}
+                ref={parentRef}
+            >
+                <SearchInputContainer>
+                    <SearchIcon>
+                        <IoSearch />
+                    </SearchIcon>
+                    <SearchInput 
+                        placeholder="Type Rxcui to Check Drug-Drug Interactions"
+                        onFocus={expandContainer}
+                        ref={inputRef}
+                        // value={selectedMeds.map((med) => med.rxcui).join("+")}
+                        value={searchQuery2}
+                        onChange={handleChange}
+
+                        />
+                <AnimatePresence>
+                    {isExpanded && (
+                        <CloseIcon 
+                            key="close-icon"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            onClick={collapseContainer}
+                        >
+                            <IoClose />
+                        </CloseIcon>
+                    )}
+                </AnimatePresence>
+                </SearchInputContainer>
+                {isExpanded && <LineSeparator />}
+                {isExpanded && ( 
+                    <SearchContent>
+                        {isLoading && (
+                            <LoadingWrapper>
+                                <MoonLoader loading color="#000" size={70} />
+                            </LoadingWrapper>
+                        )}
+                        {!isLoading && isEmpty && !noMedNames && (
+                            <LoadingWrapper>
+                                <WarningMessage>Type or paste in Rxcuis to check cross interactions</WarningMessage>
+                            </LoadingWrapper>
+                        )}
+                        {!isLoading && noMedNames && (
+                            <LoadingWrapper>
+                                <WarningMessage>No med name found by that name!</WarningMessage>
+                            </LoadingWrapper>
+                        )}
+                        {/* {!isLoading && !isEmpty && 
+                            <>
+                                {interactions.map(x => (
+                                    <XInteractions
+            
+                                    />
+                                ))}
+                            </>
+                        } */}
+                        {interactions.map(x => (
+                                    <XInteractions
+            
+                                    />
+                                ))}
+                </SearchContent>)}
+            </SearchBarContainer>
+           
+            <div>
+                <SelectedMedsList />
+                <div>
+                    <h4>Interactions Search Parameter:</h4> 
+                    {selectedMeds.map((med) => med.rxcui+"+")}
+                </div>
+                <>
+                    <XInteractions />
+                </>
+                <div>
+                    <h2>Check X-Interaction: <span><button onClick={insertRxcui}>Check</button></span></h2>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
 const SearchBarContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
@@ -117,125 +251,3 @@ const containerTransistion = {
     stiffness: 150
 }
 
-
-
-export default function Profile(props) {
-
-    const { searchQuery2, setInteractions, interactions, getMedList, setSearchQuery2, selectedMeds, setSelectedMeds, noMedNames, setNoMedNames, medNames, setMedNames, isLoading, setLoading, addMedList } = useContext(DrugContext)
-    const isEmpty = !medNames || medNames.length === 0
-    const [parentRef, isClickedOutside] = useClickOutside()
-    const [isExpanded, setExpanded] = useState(false)
-    const inputRef = useRef()
-
-
-    const handleChange = (e) => {
-        e.preventDefault()
-        if(e.target.value.trim() === "") setNoMedNames(false)
-        setSearchQuery2(e.target.value)
-    }
-    const expandContainer = () => {
-        setExpanded(true)
-    }
-
-    const collapseContainer = () => {
-        setExpanded(false)
-        setSearchQuery2("")
-        setInteractions([])
-        setNoMedNames(false)
-        if(inputRef.current) inputRef.current.value = ""
-        setLoading(false)
-    }
-
-    // const addMedList = (meds) => {
-    //     const myMedList = [...selectedMeds, meds]
-    //     setSelectedMeds(myMedList)
-    // }
-
-
-    useEffect(() => {
-        if (isClickedOutside)
-        collapseContainer()
-    }, [isClickedOutside])
-  
-    useEffect(() => {
-        console.log('useeffect ran')
-        getMedList()
-    }, [])
-
-    return (
-        <div>
-            <SearchBarContainer 
-                animate={isExpanded ? "expanded" : "collapsed"}
-                variants={containerVariants}
-                transition={containerTransistion}
-                ref={parentRef}
-            >
-                <SearchInputContainer>
-                    <SearchIcon>
-                        <IoSearch />
-                    </SearchIcon>
-                    <SearchInput 
-                        placeholder="Search Input"
-                        onFocus={expandContainer}
-                        ref={inputRef}
-                        value={selectedMeds.map((med) => med.rxcui).join("+")}
-                        onChange={handleChange}
-                        />
-                <AnimatePresence>
-                    {isExpanded && (
-                        <CloseIcon 
-                            key="close-icon"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            onClick={collapseContainer}
-                        >
-                            <IoClose />
-                        </CloseIcon>
-                    )}
-                </AnimatePresence>
-                </SearchInputContainer>
-                {isExpanded && <LineSeparator />}
-                {isExpanded && ( 
-                    <SearchContent>
-                        {isLoading && (
-                            <LoadingWrapper>
-                                <MoonLoader loading color="#000" size={70} />
-                            </LoadingWrapper>
-                        )}
-                        {!isLoading && isEmpty && !noMedNames && (
-                            <LoadingWrapper>
-                                <WarningMessage>Start typing to search for meds</WarningMessage>
-                            </LoadingWrapper>
-                        )}
-                        {!isLoading && noMedNames && (
-                            <LoadingWrapper>
-                                <WarningMessage>No med name found by that name!</WarningMessage>
-                            </LoadingWrapper>
-                        )}
-                        {!isLoading && !isEmpty && 
-                            <>
-                                {interactions.map(x => (
-                                    <XInteractions
-            
-                                    />
-                                ))}
-                            </>
-                        }
-                </SearchContent>)}
-            </SearchBarContainer>
-           
-            <div>
-                <SelectedMedsList />
-                <div>
-                    <h4>Interactions Search Parameter:</h4> 
-                    {selectedMeds.map((med) => med.rxcui+"+")}
-                </div>
-                <>
-                        <XInteractions />
-                </>
-            </div>
-        </div>
-    )
-}

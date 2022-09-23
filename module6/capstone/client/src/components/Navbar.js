@@ -6,7 +6,8 @@ const linkStyle = {
     margin: "1em",
     textDecoration: "none",
     color: "#ffffff",
-    fontSize: "16px"
+    fontSize: "16px",
+    fontFamily: "Arial"
 
   }
 
@@ -15,6 +16,7 @@ const StyledButton = styled.button`
     color: #ffffff;
     background-color: #343434;
     border: none;
+    font-size: 16px;
 
     &:hover {
      background-color: #ffffff;
