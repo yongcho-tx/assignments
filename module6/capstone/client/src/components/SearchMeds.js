@@ -46,7 +46,6 @@ function SearchMeds(props) {
     useEffect(() => {
         if (isClickedOutside)
         collapseContainer()
-        checkInteraction()
         getMedList()
     }, [isClickedOutside])
   
@@ -119,13 +118,8 @@ function SearchMeds(props) {
                 </SearchContent>)}
             </SearchBarContainer>
                 <>
-                        {/* <div>
-                            {selectedMeds.map(med => <div>{med.name}</div>)}
-                        </div> */}
-                        <SelectedMedsList _id={_id}/>
-                        
+                        <SelectedMedsList _id={_id}/>     
                 </>
-                <XInteractions />
         </div>
     )
 }

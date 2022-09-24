@@ -13,8 +13,9 @@ import XInteractions from './XInteractions.js'
 
 export default function Profile(props) {
 
-    const { searchQuery2, searchCrossInteraction, deleteMedList, setInteractions, interactions, getMedList, setSearchQuery2, selectedMeds, setSelectedMeds, noMedNames, setNoMedNames, medNames, setMedNames, isLoading, setLoading, addMedList } = useContext(DrugContext)
-    const isEmpty = !medNames || medNames.length === 0
+    const { rxcuiQuery, setRxcuiQuery, noRxcuis, setNoRxcuis, setInteractions, interactions, getMedList, selectedMeds, noMedNames, setNoMedNames, medNames, isLoading, setLoading } = useContext(DrugContext)
+    // const isEmpty = !medNames || medNames.length === 0
+    const isEmpty = !interactions || interactions.length === 0
     const [parentRef, isClickedOutside] = useClickOutside()
     const [isExpanded, setExpanded] = useState(false)
     const inputRef = useRef()
@@ -22,8 +23,8 @@ export default function Profile(props) {
 
     const handleChange = (e) => {
         e.preventDefault()
-        if(e.target.value.trim() === "") setNoMedNames(false)
-        setSearchQuery2(e.target.value)
+        if(e.target.value.trim() === "") noRxcuis(false)
+        setRxcuiQuery(e.target.value)
     }
 
     const expandContainer = () => {
@@ -32,17 +33,16 @@ export default function Profile(props) {
 
     const collapseContainer = () => {
         setExpanded(false)
-        setSearchQuery2("")
+        setRxcuiQuery("")
         setInteractions([])
-        setNoMedNames(false)
+        setNoRxcuis(false)
         if(inputRef.current) inputRef.current.value = ""
         setLoading(false)
     }
 
     const insertRxcui = () => {
-        setExpanded(true)
         inputRef.current.value = selectedMeds.map((med) => med.rxcui).join("+")
-        
+        setRxcuiQuery(inputRef.current.value)
     }
 
     useEffect(() => {
@@ -73,7 +73,7 @@ export default function Profile(props) {
                         onFocus={expandContainer}
                         ref={inputRef}
                         // value={selectedMeds.map((med) => med.rxcui).join("+")}
-                        value={searchQuery2}
+                        value={rxcuiQuery}
                         onChange={handleChange}
 
                         />
@@ -100,30 +100,21 @@ export default function Profile(props) {
                                 <MoonLoader loading color="#000" size={70} />
                             </LoadingWrapper>
                         )}
-                        {!isLoading && isEmpty && !noMedNames && (
+                        {!isLoading && isEmpty && !noRxcuis && (
                             <LoadingWrapper>
                                 <WarningMessage>Type or paste in Rxcuis to check cross interactions</WarningMessage>
                             </LoadingWrapper>
                         )}
-                        {!isLoading && noMedNames && (
+                        {!isLoading && noRxcuis && (
                             <LoadingWrapper>
-                                <WarningMessage>No med name found by that name!</WarningMessage>
+                                <WarningMessage>No cross interactions found!</WarningMessage>
                             </LoadingWrapper>
                         )}
-                        {/* {!isLoading && !isEmpty && 
+                        {!isLoading && !isEmpty && 
                             <>
-                                {interactions.map(x => (
-                                    <XInteractions
-            
-                                    />
-                                ))}
+                                <XInteractions />
                             </>
-                        } */}
-                        {interactions.map(x => (
-                                    <XInteractions
-            
-                                    />
-                                ))}
+                        }
                 </SearchContent>)}
             </SearchBarContainer>
            

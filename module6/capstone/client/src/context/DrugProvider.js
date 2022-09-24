@@ -6,12 +6,13 @@ export const DrugContext = React.createContext()
 function DrugProvider(props) {
 
     const [searchQuery, setSearchQuery] = useState("")
-    const [searchQuery2, setSearchQuery2] = useState("")
+    const [rxcuiQuery, setRxcuiQuery] = useState("")
     const [noMedNames, setNoMedNames] = useState(false)
     const [medNames, setMedNames] = useState([])
     const [selectedMeds, setSelectedMeds] = useState([])
     const [isLoading, setLoading] = useState(false)
     const [interactions, setInteractions] = useState([])
+    const [noRxcuis, setNoRxcuis] = useState(false)
 
 
 
@@ -39,37 +40,44 @@ function DrugProvider(props) {
 
         if(res) {
             // console.log("Response: res.data", res.data)
-            // console.log("object length: ", Object.keys(res.data.drugGroup).length)
+            console.log("object length: ", Object.keys(res.data.drugGroup).length)
+            // console.log("object: ", Object.keys(res.data.drugGroup))
             // console.log("drugGroup: ", res.data.drugGroup.conceptGroup[res.data.drugGroup.conceptGroup.length-1].conceptProperties)
-            Object.keys(res.data.drugGroup).length >= 2 ? setMedNames(res.data.drugGroup.conceptGroup[res.data.drugGroup.conceptGroup.length-1].conceptProperties)
-            : setNoMedNames(true)
+            const medData = res.data.drugGroup.conceptGroup
+            Object.keys(res.data.drugGroup).length >= 2 ?
+                setMedNames(medData[medData.length-1].conceptProperties)
+            : 
+                setNoMedNames(true)
             }
         setLoading(false)
+
     }
 
     const searchCrossInteraction = async () => {
 
-        if(!searchQuery2 || searchQuery2.trim() === "") return
+        if(!rxcuiQuery || rxcuiQuery.trim() === "") return
         setLoading(true)
-        setNoMedNames(false)
+        setNoRxcuis(false)
 
-        const URL = prepareCrossInteraction(searchQuery2)
-
+        const URL = prepareCrossInteraction(rxcuiQuery)
         const res = await axios.get(URL).catch((err) => {
             console.log("Error: ", err)
         })
 
         if(res) {
-            const interactionData = res.data.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0].description
-            console.log("Interaction: ", interactionData)
-            setInteractions(interactionData)
+            console.log(res.data.nlmDisclaimer)
+            const rxcuiData = res.data.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0]
+            const interactionData = rxcuiData.description
+            console.log(Object.keys(res.data).length)
+            // console.log("rxcuiData: ", rxcuiData)
+            // console.log("Interaction: ", interactionData)
+            if (!res.data.fullInteractionTypeGroup) {
+                setNoRxcuis(true)
+            } else {
+                setInteractions(interactionData)
             }
+        }
         setLoading(false)
-    }
-
-    const checkInteraction = () => {
-        const rxcuis = selectedMeds.map(med => med.rxcui).join("+")
-        searchCrossInteraction(rxcuis)
     }
 
     const addMedList = (newMeds) => {
@@ -84,11 +92,11 @@ function DrugProvider(props) {
             //if res.data in put in, the data delay of 1 is visible for selectedMeds; newMeds is direct
         })
         .catch(err => console.log(err.response.data.errMsg))
-        console.log("context line 55:", selectedMeds)
+        console.log("context line 93:", selectedMeds)   
     }
     //this prevents the each keystroke of every keyword in the search
     useDebounce(searchQuery, 750, searchMedName)
-    useDebounce(searchQuery2, 750, searchCrossInteraction)
+    useDebounce(rxcuiQuery, 750, searchCrossInteraction)
    
     const getMedList = () => {
         axios.get("/rxlist" )
@@ -112,6 +120,9 @@ function DrugProvider(props) {
         <DrugContext.Provider
             value={{
                 setSearchQuery,
+                searchQuery,
+                setRxcuiQuery,
+                rxcuiQuery,
                 noMedNames,
                 setNoMedNames,
                 medNames,
@@ -122,13 +133,12 @@ function DrugProvider(props) {
                 setLoading,
                 addMedList,
                 getMedList,
-                searchQuery2,
-                setSearchQuery2,
                 setInteractions,
                 interactions,
                 deleteMedList,
                 searchCrossInteraction,
-                checkInteraction
+                noRxcuis,
+                setNoRxcuis
             }}
         >
             {props.children}

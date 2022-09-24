@@ -6,7 +6,11 @@ export default function XInteractions(props) {
     const { interactions } = useContext(DrugContext)
     return (
         <div>
-            <h1>Interaction Description: { interactions } </h1>
+            { interactions.length > 0 ?
+                <h1>Interaction Description: { interactions } </h1>
+            :
+                <h1>No Interaction found</h1>
+            }
         </div>
     )
 }
