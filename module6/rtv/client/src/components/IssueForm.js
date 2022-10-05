@@ -5,11 +5,11 @@ import { UserContext } from '../context/UserProvider.js'
 const IssueForm = (props) => {
 
 
-const initInputs = {
-    title: props.title || "",
-    description: props.description || "",
-    imgUrl: props.imgUrl || ""
-}
+    const initInputs = {
+        title: props.title || "",
+        description: props.description || "",
+        imgUrl: props.imgUrl || ""
+    }
     const [inputs, setInputs] = useState(initInputs)
     const { btnText, _id, submit, handleClose } = props
     const { getUserIssues } = useContext(UserContext)

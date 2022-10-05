@@ -105,7 +105,7 @@ const UserProvider = (props) => {
                 return setUserState(prevState => ({
                     ...prevState,
                     issues: [...prevState.issues.filter(issue => {
-                        console.log(issue._id)
+                        console.log("remaining issue: ", issue._id)
                         return issue._id !== issueId
                     })]
                 }))

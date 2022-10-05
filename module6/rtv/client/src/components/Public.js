@@ -12,7 +12,7 @@ const Public = (props) => {
   useEffect(() => {
     console.log('use effect ran')
     getAllIssues()
-  }, [downvotesCount + upvotesCount, issues])
+  }, [downvotesCount + upvotesCount, issues, downvotesCount, upvotesCount])
 
   return (
     <div className="public">
