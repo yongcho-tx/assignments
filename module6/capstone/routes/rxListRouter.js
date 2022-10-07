@@ -1,5 +1,4 @@
 const express = require('express')
-const rxlist = require('../models/rxlist.js')
 const rxListRouter = express.Router()
 const RxList = require('../models/rxlist.js')
 

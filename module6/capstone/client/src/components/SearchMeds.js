@@ -118,7 +118,7 @@ function SearchMeds(props) {
                 </SearchContent>)}
             </SearchBarContainer>
                 <>
-                        <SelectedMedsList _id={_id}/>     
+                        <SelectedMedsList id={_id}/>     
                 </>
         </div>
     )

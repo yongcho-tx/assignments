@@ -18,6 +18,7 @@ mongoose.connect(
 // app.use('/api/', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256']}))
 
 app.use('/rxlist', require('./routes/rxListRouter.js'))
+app.use('/notes', require('./routes/notesRouter.js'))
 
 app.use((err, req, res, next) => {
     console.log(err)

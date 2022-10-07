@@ -43,7 +43,7 @@ function MedName(props) {
         <div>
             <MedNameContainer onClick={(() => handleAddMedList({ name, rxcui, tty}))}>
                 <TTY> {tty === 'SCD' ? "Semantic Clinical Drug" : tty === 'SBD' ? "Semantic Branded Drug" : "Other"} { tty }</TTY>
-                <Name>{ name } </Name>
+                <Name> { name } </Name>
                 <Rxcui> { `Rxcui: ${rxcui}`} </Rxcui>
             </MedNameContainer>
         </div>

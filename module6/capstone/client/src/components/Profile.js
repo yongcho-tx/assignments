@@ -9,6 +9,8 @@ import { useClickOutside } from 'react-click-outside-hook'
 import MoonLoader from 'react-spinners/MoonLoader'
 import MedName from './MedName'
 import XInteractions from './XInteractions.js'
+import Notesform from './NotesForm.js'
+
 
 
 export default function Profile(props) {
@@ -75,7 +77,6 @@ export default function Profile(props) {
                         // value={selectedMeds.map((med) => med.rxcui).join("+")}
                         value={rxcuiQuery}
                         onChange={handleChange}
-
                         />
                 <AnimatePresence>
                     {isExpanded && (
@@ -117,7 +118,6 @@ export default function Profile(props) {
                         }
                 </SearchContent>)}
             </SearchBarContainer>
-           
             <div>
                 <SelectedMedsList />
                 <div>
@@ -125,11 +125,21 @@ export default function Profile(props) {
                     {selectedMeds.map((med) => med.rxcui+"+")}
                 </div>
                 <>
-                    <XInteractions />
+                    {/* <XInteractions /> */}
                 </>
                 <div>
                     <h2>Check X-Interaction: <span><button onClick={insertRxcui}>Check</button></span></h2>
                 </div>
+                <div>
+                    {
+                        interactions.length > 0 ?
+                        <h2>My Interaction List: {interactions}</h2>
+                        :
+                        <h2>You do not have any drug-drug interaction to worry about</h2>
+                    }
+                    
+                </div>
+                <Notesform />
             </div>
         </div>
     )

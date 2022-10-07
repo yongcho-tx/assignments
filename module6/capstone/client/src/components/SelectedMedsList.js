@@ -3,7 +3,7 @@ import {DrugContext} from '../context/DrugProvider'
 
 function SelectedMedsList(props) {
     const { selectedMeds, deleteMedList } = useContext(DrugContext)
-    const { _id } = props
+    const { id } = props
     // console.log("selectedMeds console: ", selectedMeds)
     // const selectedMedArr = selectedMeds.map(med => <h3 key={med.rxcui} {...med}>Name: {med.name} Rxcui: {med.rxcui} </h3>)
 

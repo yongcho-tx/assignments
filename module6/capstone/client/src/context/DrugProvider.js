@@ -103,7 +103,7 @@ function DrugProvider(props) {
         .then(res => {
             setSelectedMeds(res.data)
         })
-        .catch(err => console.log(err.respojnse.data.errMsg))
+        .catch(err => console.log(err.response.data.errMsg))
     }
 
     const deleteMedList = (medId) => {
