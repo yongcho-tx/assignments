@@ -1,27 +1,16 @@
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 
 function NotesForm(props) {
 
+    const { addNote } = props
     const initInputs = {
         notes: ""
     }
 
     const [inputs, setInputs] = useState(initInputs)
     const [allNotes, setAllNotes] = useState([])
-
-    function addNotes() {
-        axios.post("/notes", {notes})
-            .then(res => {
-                console.log(res.data)
-                setInputs(prevInputs => ({
-                    ...prevInputs
-                }))
-                console.log("notes: ", inputs)
-            })
-            .catch(err => console.log(err.response.data.errMsg))
-    }
 
   
     function handleChange(e) {
@@ -31,16 +20,8 @@ function NotesForm(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        addNotes()
+        addNote(inputs)
         setInputs(initInputs)
-    }
-
-    function getNotes() {
-        axios.get("/notes")
-            .then(res => {
-                setAllNotes(res.data)
-            })
-            .catch(err => console.log(err.response.data.errMsg))
     }
 
     function handleDelete(noteId) {
@@ -51,13 +32,22 @@ function NotesForm(props) {
             .catch(err => console.log(err.response.data.errMsg))
     }
 
+
     const { notes } = inputs
 
     //this works but is this the best practice, as it triggers useeffect with each keystroke?
-    useEffect(() => {
-        getNotes()
-        console.log("useeffect ran")
-    }, [notes])
+    // useEffect(() => {
+        // getNotes()
+        // getUserNotes()
+
+    //     console.log("useeffect ran")
+    // }, [notes])
+
+
+    // if(isError) return <h1> Error: {error.mesage}, try again!</h1>
+    // if(isLoading) return <h1> Loading...</h1>
+
+    // console.log(data)
 
     return (
         <>

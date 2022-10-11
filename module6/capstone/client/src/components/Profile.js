@@ -1,5 +1,6 @@
 
 import { DrugContext } from '../context/DrugProvider.js'
+import { UserContext } from '../context/UserProvider.js'
 import SelectedMedsList from './SelectedMedsList.js'
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import styled, { keyframes } from 'styled-components'
@@ -10,12 +11,14 @@ import MoonLoader from 'react-spinners/MoonLoader'
 import MedName from './MedName'
 import XInteractions from './XInteractions.js'
 import Notesform from './NotesForm.js'
+import NoteList from './NoteList.js'
 
 
 
 export default function Profile(props) {
 
     const { rxcuiQuery, setRxcuiQuery, noRxcuis, setNoRxcuis, setInteractions, interactions, getMedList, selectedMeds, noMedNames, setNoMedNames, medNames, isLoading, setLoading } = useContext(DrugContext)
+    const { user: { username }, addNote, notes } = useContext(UserContext)
     // const isEmpty = !medNames || medNames.length === 0
     const isEmpty = !interactions || interactions.length === 0
     const [parentRef, isClickedOutside] = useClickOutside()
@@ -60,6 +63,7 @@ export default function Profile(props) {
 
     return (
         <div>
+            <h1>Welcome @{username}!</h1>
             <SearchBarContainer 
                 animate={isExpanded ? "expanded" : "collapsed"}
                 variants={containerVariants}
@@ -121,25 +125,22 @@ export default function Profile(props) {
             <div>
                 <SelectedMedsList />
                 <div>
-                    <h4>Interactions Search Parameter:</h4> 
-                    {selectedMeds.map((med) => med.rxcui+"+")}
-                </div>
-                <>
-                    {/* <XInteractions /> */}
-                </>
-                <div>
+                    <br/>
                     <h2>Check X-Interaction: <span><button onClick={insertRxcui}>Check</button></span></h2>
+                    <br/>
                 </div>
                 <div>
                     {
                         interactions.length > 0 ?
                         <h2>My Interaction List: {interactions}</h2>
                         :
-                        <h2>You do not have any drug-drug interaction to worry about</h2>
+                        <h2>You do not have any drug-drug interaction based on your medication list</h2>
                     }
                     
                 </div>
-                <Notesform />
+                <Notesform addNote={addNote}/>
+                <h3>Your Notes</h3>
+                <NoteList notes={notes}/>
             </div>
         </div>
     )

@@ -12,7 +12,7 @@ import XInteractions from './XInteractions'
 
 function SearchMeds(props) {
 
-    const { searchQuery, getMedList, checkInteraction, setSearchQuery, selectedMeds, setSelectedMeds, noMedNames, setNoMedNames, medNames, setMedNames, isLoading, setLoading, addMedList } = useContext(DrugContext)
+    const { searchQuery, interactions, setRxcuiQuery, getMedList, checkInteraction, setSearchQuery, selectedMeds, setSelectedMeds, noMedNames, setNoMedNames, medNames, setMedNames, isLoading, setLoading, addMedList } = useContext(DrugContext)
     const isEmpty = !medNames || medNames.length === 0
     const [parentRef, isClickedOutside] = useClickOutside()
     const [isExpanded, setExpanded] = useState(false)
@@ -43,12 +43,20 @@ function SearchMeds(props) {
     //     setSelectedMeds(myMedList)
     // }
 
+    function searchSideEffects() {
+        setRxcuiQuery(selectedMeds.map((med) => med.rxcui).join("+"))
+    }
+
     useEffect(() => {
         if (isClickedOutside)
         collapseContainer()
         getMedList()
     }, [isClickedOutside])
   
+    useEffect(() => {
+        searchSideEffects()
+        console.log("useefect ran")
+    }, [selectedMeds, interactions])
 
     return (
         <div>
@@ -118,7 +126,10 @@ function SearchMeds(props) {
                 </SearchContent>)}
             </SearchBarContainer>
                 <>
-                        <SelectedMedsList id={_id}/>     
+                        <SelectedMedsList 
+                            id={_id}
+                        />    
+                        <XInteractions /> 
                 </>
         </div>
     )

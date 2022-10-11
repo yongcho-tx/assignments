@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -26,14 +26,14 @@ const StyledButton = styled.button`
 
 
 
-export default function Navbar() {
-    
+export default function Navbar(props) {
+    const { logout } = props
     return (
         <div className="navbar">
             <Link to="/" style={linkStyle}>Home</Link>
             <Link to="profile" style={linkStyle}>Profile</Link>
             <Link to="search" style={linkStyle}>Search</Link>
-            <StyledButton>Logout</StyledButton>
+            <StyledButton onClick={logout}>Logout</StyledButton>
         </div>
     )
 }

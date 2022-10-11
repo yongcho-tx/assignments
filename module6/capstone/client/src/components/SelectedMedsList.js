@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react'
 import {DrugContext} from '../context/DrugProvider'
+import XInteractions from './XInteractions'
 
 function SelectedMedsList(props) {
     const { selectedMeds, deleteMedList } = useContext(DrugContext)
-    const { id } = props
+    const { id, searchSideEffects } = props
     // console.log("selectedMeds console: ", selectedMeds)
     // const selectedMedArr = selectedMeds.map(med => <h3 key={med.rxcui} {...med}>Name: {med.name} Rxcui: {med.rxcui} </h3>)
 
@@ -43,8 +44,9 @@ function SelectedMedsList(props) {
                 { selectedMeds.map(med => {
                     return (
                         <div key={med.rxcui}>
-                            <h3>Name: {med.name} Rxcui: {med.rxcui} <span><button onClick={() => deleteMedList(med._id)}>Remove</button></span></h3>
+                            <h3>Name: {med.name} <span><button onClick={() => deleteMedList(med._id)}>Remove</button></span></h3>
                         </div>
+            
                     )
                 })}
             </div>

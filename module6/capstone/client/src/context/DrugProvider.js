@@ -66,17 +66,21 @@ function DrugProvider(props) {
 
         if(res) {
             console.log(res.data.nlmDisclaimer)
-            const rxcuiData = res.data.fullInteractionTypeGroup[0].fullInteractionType[0].interactionPair[0]
-            const interactionData = rxcuiData.description
-            console.log(Object.keys(res.data).length)
-            // console.log("rxcuiData: ", rxcuiData)
-            // console.log("Interaction: ", interactionData)
-            if (!res.data.fullInteractionTypeGroup) {
-                setNoRxcuis(true)
-            } else {
-                setInteractions(interactionData)
-            }
-        }
+            try { 
+                    const rxcuiData = res.data?.fullInteractionTypeGroup[0]?.fullInteractionType[0]?.interactionPair[0]
+                    const interactionData = rxcuiData.description
+                    console.log(Object.keys(res.data).length)
+                    // console.log("rxcuiData: ", rxcuiData)
+                    // console.log("Interaction: ", interactionData)
+                    if (!res.data.fullInteractionTypeGroup) {
+                        setNoRxcuis(true)
+                    } else {
+                        setInteractions(interactionData)
+                    }
+                } catch {
+                    setInteractions("")
+                }
+            }   
         setLoading(false)
     }
 
