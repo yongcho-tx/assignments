@@ -27,13 +27,14 @@ const StyledButton = styled.button`
 
 
 export default function Navbar(props) {
-    const { logout } = props
+    const { logout, token } = props
+
     return (
         <div className="navbar">
             <Link to="/" style={linkStyle}>Home</Link>
-            <Link to="profile" style={linkStyle}>Profile</Link>
+            { token && <Link to="profile" style={linkStyle}>Profile</Link> }
             <Link to="search" style={linkStyle}>Search</Link>
-            <StyledButton onClick={logout}>Logout</StyledButton>
+            { token && <StyledButton onClick={logout}>Logout</StyledButton>}
         </div>
     )
 }

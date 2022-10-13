@@ -3,13 +3,13 @@ import AuthForm from './AuthForm.js'
 import {UserContext} from '../context/UserProvider.js'
 
 
-    function Auth() {
+function Auth(props) {
 
     const initInputs = { username: "", password: "" }
     const [inputs, setInputs] = useState(initInputs)
     const [toggle, setToggle] = useState(false)
 
-    const { signup, login, errMsg, resetAuthErr } = useContext(UserContext)
+    const { signup, login, errMsg, resetAuthErr, token } = useContext(UserContext)
 
     const handleChange = e => {
         const {name, value} = e.target
@@ -35,7 +35,11 @@ import {UserContext} from '../context/UserProvider.js'
     }
         return (
             <div className="auth-container">
-                <h1>Search RX Drug-Drug Interactions App</h1>
+                { token ?
+                    <h1>Search RX Drug-Drug Interactions App</h1>
+                :
+                    <h1>Login to Do More</h1>
+                }   
                 { !toggle ?
                     <>
                         <AuthForm

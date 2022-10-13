@@ -1,12 +1,12 @@
-/* * {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-size: 16px;
-    font-family: sans-serif;
+    /* font-size: 16px; */
+    /* font-family: sans-serif; */
     outline: none;
     text-decoration: none;
-  } */
+  }
 
 .navbar {
     display: flex;
@@ -16,46 +16,70 @@
     background-color: #343434;
   }
 
+.auth-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 500px;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14)
+}
 
-  .auth-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    height: 500px;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14)
-  }
-  
-  .auth-container > h1 {
-    font-size: 2em;
-    margin: 24px;
-  }
-  
-  .auth-container > p {
-    margin: 16px;
-    text-decoration: underline;
-  }
-  
-  .auth-container > form {
-    border: 1px solid #3339;
-    padding: 20px;
-    border-radius: 5px;
-    background-color: #bebebe;
-  
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .auth-container > form > input {
-    margin: 16px 8px;
-    padding: 8px;
-    border-radius: 4px;
-  }
-  
-  .auth-container > form > button {
-    margin: 16px 8px;
-    padding: 8px;
-    border-radius: 4px;
-    background-color: white;
-  }
+.auth-container > h1 {
+  font-size: 2em;
+  margin: 24px;
+}
+
+.auth-container > p {
+  margin: 16px;
+  text-decoration: underline;
+}
+
+.auth-container > form {
+  border: 1px solid #3339;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #bebebe;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-container > form > input {
+  margin: 16px 8px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.auth-container > form > button {
+  margin: 16px 8px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-inner {
+  position: relative;
+  padding: 32px;
+  width: 500px;
+  max-width: 640px;
+  background-color: #FFF;
+}
+
+.popup-inner .close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}

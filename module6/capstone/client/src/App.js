@@ -7,6 +7,7 @@ import Profile from './components/Profile.js'
 import styled from 'styled-components'
 import Navbar from './components/Navbar.js'
 import Auth from './components/Auth.js'
+import ProtectedRoute from './components/ProtectedRoute.js'
 import { UserContext } from './context/UserProvider.js'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -24,7 +25,7 @@ function App() {
 
   return (
     <div>
-        <Navbar logout={logout}/>
+        <Navbar logout={logout} token={token}/>
         <AppContainer>
           <Routes>
             <Route
@@ -33,7 +34,7 @@ function App() {
             />
             <Route 
               path="/search"
-              element={ <SearchMeds />}
+              element={ token ? <Navigate to="/profile" /> : <SearchMeds />}
             />
             <Route 
               path="/interactions"
@@ -41,7 +42,9 @@ function App() {
             />
             <Route 
               path="/profile"
-              element={ <Profile /> }
+              element={<ProtectedRoute token={token}>
+                  <Profile />
+                </ProtectedRoute>}
             />
           </Routes>
         </AppContainer>

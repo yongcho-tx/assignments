@@ -16,7 +16,8 @@ function UserProvider(props) {
     const initState = { 
         user: JSON.parse(localStorage.getItem("user")) || {}, 
         token: localStorage.getItem("token") || "",
-        notes: [] 
+        notes: [],
+        errMsg: ""
     }
 
     const [userState, setUserState] = useState(initState)
@@ -32,7 +33,7 @@ function UserProvider(props) {
                     user, token
                 }))
             })
-            .catch(err => console.log(err.response.data.errMsg))
+            .catch(err => handleAuthErr(err.response.data.errMsg))
     }
 
     function login(credentials) {
@@ -47,7 +48,7 @@ function UserProvider(props) {
                     user, token
                 }))
             })
-            .catch(err => console.log(err.response.data.errMsg))
+            .catch(err => handleAuthErr(err.response.data.errMsg))
     }
 
     function logout() {
@@ -60,7 +61,21 @@ function UserProvider(props) {
         })
     }
 
-   function getUserNotes() {
+    function handleAuthErr(errMsg) {
+        setUserState(prevState => ({
+            ...prevState,
+            errMsg
+        }))
+    }
+
+    function resetAuthErr() {
+        setUserState(prevState => ({
+            ...prevState,
+            errMsg: ""
+        }))
+    }
+
+    function getUserNotes() {
         userAxios.get("/api/notes/user")
             .then(res => setUserState(prevState => ({
                 ...prevState,
@@ -84,7 +99,7 @@ function UserProvider(props) {
     return (
         <UserContext.Provider
             value={{
-                ...userState, signup, login, logout, addNote, getUserNotes
+                ...userState, signup, login, logout, addNote, getUserNotes, resetAuthErr
             }}
         >
             { props.children }
