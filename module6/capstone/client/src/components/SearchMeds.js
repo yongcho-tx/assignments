@@ -12,7 +12,19 @@ import XInteractions from './XInteractions'
 
 function SearchMeds(props) {
 
-    const { searchQuery, interactions, setRxcuiQuery, getMedList, checkInteraction, setSearchQuery, selectedMeds, setSelectedMeds, noMedNames, setNoMedNames, medNames, setMedNames, isLoading, setLoading, addMedList } = useContext(DrugContext)
+    const { searchQuery,
+            interactions,
+            setRxcuiQuery,
+            getMedList,
+            setSearchQuery,
+            selectedMeds,
+            noMedNames,
+            setNoMedNames,
+            medNames,
+            setMedNames,
+            isLoading,
+            setLoading,
+            addMedList } = useContext(DrugContext)
     const isEmpty = !medNames || medNames.length === 0
     const [parentRef, isClickedOutside] = useClickOutside()
     const [isExpanded, setExpanded] = useState(false)

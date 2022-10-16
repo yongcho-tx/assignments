@@ -1,6 +1,7 @@
 import { useDebounce } from '../hooks/debounceHook'
 import React, { useState } from 'react'
 import axios from 'axios'
+
 export const DrugContext = React.createContext()
 
 function DrugProvider(props) {
@@ -56,13 +57,13 @@ function DrugProvider(props) {
     const searchCrossInteraction = async () => {
 
         if(!rxcuiQuery || rxcuiQuery.trim() === "") return
-        setLoading(true)
-        setNoRxcuis(false)
+            setLoading(true)
+            setNoRxcuis(false)
 
-        const URL = prepareCrossInteraction(rxcuiQuery)
-        const res = await axios.get(URL).catch((err) => {
-            console.log("Error: ", err)
-        })
+            const URL = prepareCrossInteraction(rxcuiQuery)
+            const res = await axios.get(URL).catch((err) => {
+                console.log("Error: ", err)
+            })
 
         if(res) {
             console.log(res.data.nlmDisclaimer)
@@ -98,6 +99,11 @@ function DrugProvider(props) {
         .catch(err => console.log(err.response.data.errMsg))
         console.log("context line 93:", selectedMeds)   
     }
+
+    const addMedListLocalStorage = (newMeds) => {
+        localStorage.setItem("selectedMeds", JSON.stringify(selectedMeds))
+    }
+
     //this prevents the each keystroke of every keyword in the search
     useDebounce(searchQuery, 750, searchMedName)
     useDebounce(rxcuiQuery, 750, searchCrossInteraction)
@@ -142,7 +148,8 @@ function DrugProvider(props) {
                 deleteMedList,
                 searchCrossInteraction,
                 noRxcuis,
-                setNoRxcuis
+                setNoRxcuis,
+                addMedListLocalStorage
             }}
         >
             {props.children}
