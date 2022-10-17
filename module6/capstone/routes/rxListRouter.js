@@ -4,6 +4,7 @@ const RxList = require('../models/rxlist.js')
 
 // Post Med
 rxListRouter.post("/", (req, res, next) => {
+    req.body.user = req.auth._id
     const newMed = new RxList(req.body)
     newMed.save((err, savedMed) => {
         if(err) {
@@ -14,9 +15,20 @@ rxListRouter.post("/", (req, res, next) => {
     })
 })
 
-// Get Med
+// Get All MedList
 rxListRouter.get("/", (req, res, next) => {
     RxList.find((err, rxlist) => {
+        if(err) {
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(rxlist)
+    })
+})
+
+// Get medlist by User
+rxListRouter.get("/user", (req, res, next) => {
+    RxList.find({ user: req.auth._id }, (err, rxlist) => {
         if(err) {
             res.status(500)
             return next(err)

@@ -21,7 +21,8 @@ mongoose.connect(
 app.use('/auth', require('./routes/authRouter.js'))
 //expressjwt will require token before allowing access to '/api' route
 app.use('/api', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256']}))
-app.use('/rxlist', require('./routes/rxListRouter.js'))
+app.use('/api/rxlist', require('./routes/rxListRouter.js'))
+// app.use('/rxlist', require('./routes/rxListRouter.js'))
 app.use('/api/notes', require('./routes/noteRouter.js'))
 
 app.use((err, req, res, next) => {

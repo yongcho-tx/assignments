@@ -15,6 +15,11 @@ const rxListSchema = new Schema({
         type: Number,
         required: true,
         unique: true
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 
 })

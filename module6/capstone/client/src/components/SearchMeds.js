@@ -25,13 +25,14 @@ function SearchMeds(props) {
             isLoading,
             setLoading,
             addMedList,
-            addMedListLocalStorage
+            addMedListLocalStorage,
+            errMsg
          } = useContext(DrugContext)
     const isEmpty = !medNames || medNames.length === 0
     const [parentRef, isClickedOutside] = useClickOutside()
     const [isExpanded, setExpanded] = useState(false)
     const inputRef = useRef()
-    const { _id } = props
+    const { _id, logout } = props
 
 
     const handleChange = (e) => {
@@ -65,7 +66,7 @@ function SearchMeds(props) {
         if (isClickedOutside)
         collapseContainer()
         getMedList()
-    }, [isClickedOutside])
+    }, [isClickedOutside, logout])
   
     useEffect(() => {
         searchSideEffects()
@@ -142,6 +143,7 @@ function SearchMeds(props) {
                 <>
                         <SelectedMedsList 
                             id={_id}
+                            errMsg={errMsg}
                         />    
                         <XInteractions /> 
                 </>

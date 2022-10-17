@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { DrugContext } from './DrugProvider.js'
 
+
 export const UserContext = React.createContext()
 
 const userAxios = axios.create()
@@ -14,13 +15,13 @@ userAxios.interceptors.request.use(config => {
 
 function UserProvider(props) {
 
-    const { selectedMeds, setSelectedMeds } = props
-
+    
+    // const { selectedMeds } = useContext(DrugContext)
     const initState = { 
         user: JSON.parse(localStorage.getItem("user")) || {}, 
         token: localStorage.getItem("token") || "",
         notes: [],
-        errMsg: ""
+        errMsg: "",
     }
 
     const [userState, setUserState] = useState(initState)
@@ -58,11 +59,11 @@ function UserProvider(props) {
     function logout() {
         localStorage.removeItem("token")
         localStorage.removeItem("user")
+        localStorage.removeItem("selectedMeds")
         setUserState({
             user: {},
             token: "",
             notes: [],
-            selectedMeds: []
         })
     }
 
@@ -109,7 +110,8 @@ function UserProvider(props) {
                 logout, 
                 addNote, 
                 getUserNotes, 
-                resetAuthErr
+                resetAuthErr,
+                userAxios
             }}
         >
             { props.children }

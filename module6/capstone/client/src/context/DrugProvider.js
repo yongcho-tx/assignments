@@ -1,6 +1,7 @@
 import { useDebounce } from '../hooks/debounceHook'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
+import {UserContext} from '../context/UserProvider.js'
 
 export const DrugContext = React.createContext()
 
@@ -14,6 +15,7 @@ function DrugProvider(props) {
     const [isLoading, setLoading] = useState(false)
     const [interactions, setInteractions] = useState([])
     const [noRxcuis, setNoRxcuis] = useState(false)
+    const { token, userAxios, userState, setUserState, logout } = useContext(UserContext)
 
 
 
@@ -114,19 +116,64 @@ function DrugProvider(props) {
     // }
 
 
+    // const addMedListLocalStorage = (newMeds) => {
+    //     if(token)  {
+    //         axios.post("/rxlist", newMeds)
+    //     .then(res => {
+    //         console.log("i am res.data:", res.data)
+    //         // const myMedList = [...selectedMeds, newMeds]
+    //         setSelectedMeds(prevState => {
+    //             console.log("Saved into setSelectedMeds", res.data)
+    //             return [...prevState, newMeds]
+    //         })
+    //         //if res.data in put in, the data delay of 1 is visible for selectedMeds; newMeds is direct
+    //     })
+    //     .catch(err => console.log(err.response.data.errMsg))
+    
+    //     } else {
+
+    //     const newSelected = [...selectedMeds, newMeds]
+    //     localStorage.setItem("selectedMeds", JSON.stringify(newSelected))
+    //     setSelectedMeds(newSelected)
+  
+    //     }
+    // }
+
+    //trial useraxios user token route
     const addMedListLocalStorage = (newMeds) => {
-        const newSelected = [...selectedMeds, newMeds]
-        localStorage.setItem("selectedMeds", JSON.stringify(newSelected))
-        setSelectedMeds(newSelected)
+        if(token)  {
+            userAxios.post("/api/rxlist", newMeds)
+                .then(res => {
+                    console.log("addMedListLocalStorage function :", res.data)
+                    // const myMedList = [...selectedMeds, newMeds]
+                    setSelectedMeds(prevState => {
+                        return [...prevState, newMeds]
+                     })
+                })
+                .catch(err => console.log(err.response.data.errMsg))
+        } else {
+                const newSelected = [...selectedMeds, newMeds]
+                localStorage.setItem("selectedMeds", JSON.stringify(newSelected))
+                setSelectedMeds(newSelected)
+        }
     }
+
     //trial getmedlist from localStorage
     const getMedList = () => {
     //    localStorage.getItem("selectedMeds")
-       JSON.parse(localStorage.getItem("selectedMeds"))
+        if(token) {
+            userAxios.get('api/rxlist/user' )
+            .then(res => {
+                setSelectedMeds(res.data)
+            })
+            .catch(err => console.log(err.response.data.errMsg))
+        } else {
+            JSON.parse(localStorage.getItem("selectedMeds"))
         }
+    }
 
     const deleteMedList = (medId) => {
-        axios.delete(`/rxlist/${medId}`)
+        userAxios.delete(`/api/rxlist/${medId}`)
             .then(res => {
                 console.log(medId)
                 console.log(selectedMeds.filter(med => med._id !== medId))
@@ -137,7 +184,7 @@ function DrugProvider(props) {
 
     useEffect(() => {
         JSON.parse(localStorage.getItem("selectedMeds"))
-    }, [selectedMeds])
+    }, [selectedMeds, logout])
 
     return (
         <DrugContext.Provider

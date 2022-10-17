@@ -34,7 +34,7 @@ function App() {
             />
             <Route 
               path="/search"
-              element={ token ? <Navigate to="/profile" /> : <SearchMeds />}
+              element={  <SearchMeds />}
             />
             <Route 
               path="/interactions"
