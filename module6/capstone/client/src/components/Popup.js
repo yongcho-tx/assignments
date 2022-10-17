@@ -32,7 +32,7 @@ export default Popup
 
 const CloseIcon = styled(motion.span)`
     color: #bebebe;
-    font-size: 26px;
+    font-size: 32px;
     // vertical-align: middle;
     transition: all 200ms ease-in-out;
     cursor: pointer;

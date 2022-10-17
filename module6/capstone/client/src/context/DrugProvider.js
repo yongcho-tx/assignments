@@ -1,5 +1,5 @@
 import { useDebounce } from '../hooks/debounceHook'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export const DrugContext = React.createContext()
@@ -100,21 +100,30 @@ function DrugProvider(props) {
         console.log("context line 93:", selectedMeds)   
     }
 
-    const addMedListLocalStorage = (newMeds) => {
-        localStorage.setItem("selectedMeds", JSON.stringify(selectedMeds))
-    }
 
     //this prevents the each keystroke of every keyword in the search
     useDebounce(searchQuery, 750, searchMedName)
     useDebounce(rxcuiQuery, 750, searchCrossInteraction)
    
-    const getMedList = () => {
-        axios.get("/rxlist" )
-        .then(res => {
-            setSelectedMeds(res.data)
-        })
-        .catch(err => console.log(err.response.data.errMsg))
+    // const getMedList = () => {
+    //     axios.get("/rxlist" )
+    //     .then(res => {
+    //         setSelectedMeds(res.data)
+    //     })
+    //     .catch(err => console.log(err.response.data.errMsg))
+    // }
+
+
+    const addMedListLocalStorage = (newMeds) => {
+        const newSelected = [...selectedMeds, newMeds]
+        localStorage.setItem("selectedMeds", JSON.stringify(newSelected))
+        setSelectedMeds(newSelected)
     }
+    //trial getmedlist from localStorage
+    const getMedList = () => {
+    //    localStorage.getItem("selectedMeds")
+       JSON.parse(localStorage.getItem("selectedMeds"))
+        }
 
     const deleteMedList = (medId) => {
         axios.delete(`/rxlist/${medId}`)
@@ -125,6 +134,10 @@ function DrugProvider(props) {
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
+
+    useEffect(() => {
+        JSON.parse(localStorage.getItem("selectedMeds"))
+    }, [selectedMeds])
 
     return (
         <DrugContext.Provider

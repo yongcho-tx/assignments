@@ -24,7 +24,9 @@ function SearchMeds(props) {
             setMedNames,
             isLoading,
             setLoading,
-            addMedList } = useContext(DrugContext)
+            addMedList,
+            addMedListLocalStorage
+         } = useContext(DrugContext)
     const isEmpty = !medNames || medNames.length === 0
     const [parentRef, isClickedOutside] = useClickOutside()
     const [isExpanded, setExpanded] = useState(false)
@@ -130,7 +132,7 @@ function SearchMeds(props) {
                                         rxcui={medName.rxcui}
                                         tty={medName.tty}
                                         key={medName.rxcui}
-                                        handleAddMedList={addMedList}
+                                        handleAddMedList={addMedListLocalStorage}
                                     />
                                 ))}
                             </>
