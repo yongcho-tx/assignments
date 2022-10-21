@@ -26,7 +26,8 @@ function SearchMeds(props) {
             setLoading,
             addMedList,
             addMedListLocalStorage,
-            errMsg
+            errMsg,
+            token
          } = useContext(DrugContext)
     const isEmpty = !medNames || medNames.length === 0
     const [parentRef, isClickedOutside] = useClickOutside()
@@ -141,6 +142,7 @@ function SearchMeds(props) {
                 </SearchContent>)}
             </SearchBarContainer>
                 <>
+                        
                         <SelectedMedsList 
                             id={_id}
                             errMsg={errMsg}

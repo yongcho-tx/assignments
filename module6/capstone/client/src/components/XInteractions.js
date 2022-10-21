@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { DrugContext } from '../context/DrugProvider.js'
-import Popup from './Popup.js'
-import Auth from './Auth.js'
+import LoginPopup from './LoginPopup.js'
+import SaveListPopup from './SaveListPopup.js'
+
 
 export default function XInteractions(props) {
-    const { interactions } = useContext(DrugContext)
+    const { interactions, token } = useContext(DrugContext)
     const [buttonPopup, setButtonPopup] = useState(false)
 
     return (
@@ -12,10 +13,17 @@ export default function XInteractions(props) {
             { interactions.length > 0 &&
                 <>
                 <h2>Interaction Description: { interactions } <span><button onClick={() => setButtonPopup(true)}>Save to Profile</button></span></h2>
-           
+                <LoginPopup trigger={buttonPopup} setTrigger={setButtonPopup}/>
+                </>
+            }    
+            
+            { interactions.length > 0 && token &&
+                 <>
+                 <h2>Interaction Description: { interactions } <span><button onClick={() => setButtonPopup(true)}>Save to Profile</button></span></h2>
+                 <SaveListPopup trigger={buttonPopup} setTrigger={setButtonPopup}/>
                  </>
             }
-                <Popup trigger={buttonPopup} setTrigger={setButtonPopup}/>
+                
         </div>
     )
 }

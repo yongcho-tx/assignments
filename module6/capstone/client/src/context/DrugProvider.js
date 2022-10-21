@@ -18,10 +18,9 @@ function DrugProvider(props) {
         user: JSON.parse(localStorage.getItem("user")) || {}, 
         token: localStorage.getItem("token") || "",
         notes: [],
-        errMsg: "",
-        selectedMeds: []
+        errMsg: ""
     }
-    console.log("initstate: ", initState.selectedMeds)
+    // console.log("initstate: ", selectedMeds)
 
     const [userState, setUserState] = useState(initState)
     const [searchQuery, setSearchQuery] = useState("")
@@ -124,6 +123,7 @@ function DrugProvider(props) {
                 localStorage.setItem("token", token)
                 localStorage.setItem("user", JSON.stringify(user))
                 getUserNotes()
+                getMedList()
                 setUserState(prevUserState => ({
                     ...prevUserState,
                     user, token
@@ -141,6 +141,7 @@ function DrugProvider(props) {
             token: "",
             notes: [],
         })
+        setSelectedMeds([])
     }
 
     function handleAuthErr(errMsg) {
@@ -185,10 +186,9 @@ function DrugProvider(props) {
                 .then(res => {
                     console.log("addMedListLocalStorage function :", res.data)
                     // const myMedList = [...selectedMeds, newMeds]
-                    setUserState(prevState => ({
-                        ...prevState,
-                        selectedMeds: [...prevState.selectedMeds, res.data]
-                    }))
+                    setSelectedMeds(prevState => {
+                        return [...prevState, newMeds]
+                    })
                  })
                 .catch(err => console.log(err.response.data.errMsg))
         } else {

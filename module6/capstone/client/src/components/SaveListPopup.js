@@ -3,8 +3,9 @@ import Auth from './Auth'
 import { IoClose } from 'react-icons/io5'
 import styled from "styled-components"
 import { motion } from 'framer-motion'
+import SelectedMedsList from './SelectedMedsList'
 
-function Popup(props) {
+function SaveListPopup(props) {
   return (props.trigger) ? (
     <div className="popup">
         <div className="popup-inner">
@@ -21,14 +22,13 @@ function Popup(props) {
               </CloseIcon>
               {/* </button> */}
             { props.children }
-            <Auth />
+            <SelectedMedsList />
         </div>
     </div>
   ) : ""
 }
 
-export default Popup
-
+export default SaveListPopup
 
 const CloseIcon = styled(motion.span)`
     color: #bebebe;
