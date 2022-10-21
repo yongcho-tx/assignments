@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react'
 import Note from './Note.js'
-import { UserContext } from '../context/UserProvider.js'
+import { DrugContext } from '../context/DrugProvider.js'
 
 function NoteList(props) {
 
 
     const { notes } = props
-    const { getUserNotes } = useContext(UserContext)
+    const { getUserNotes } = useContext(DrugContext)
 
 
     useEffect(() => {

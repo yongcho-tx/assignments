@@ -1,6 +1,5 @@
 
 import { DrugContext } from '../context/DrugProvider.js'
-import { UserContext } from '../context/UserProvider.js'
 import SelectedMedsList from './SelectedMedsList.js'
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import styled, { keyframes } from 'styled-components'
@@ -18,7 +17,7 @@ import NoteList from './NoteList.js'
 export default function Profile(props) {
 
     const { rxcuiQuery, setRxcuiQuery, noRxcuis, setNoRxcuis, setInteractions, interactions, getMedList, selectedMeds, noMedNames, setNoMedNames, medNames, isLoading, setLoading } = useContext(DrugContext)
-    const { user: { username }, addNote, notes } = useContext(UserContext)
+    const { user: { username }, addNote, notes } = useContext(DrugContext)
     // const isEmpty = !medNames || medNames.length === 0
     const isEmpty = !interactions || interactions.length === 0
     const [parentRef, isClickedOutside] = useClickOutside()

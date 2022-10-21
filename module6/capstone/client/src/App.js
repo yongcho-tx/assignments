@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import Navbar from './components/Navbar.js'
 import Auth from './components/Auth.js'
 import ProtectedRoute from './components/ProtectedRoute.js'
-import { UserContext } from './context/UserProvider.js'
+import { DrugContext } from './context/DrugProvider.js'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const AppContainer = styled.div`
@@ -21,7 +21,7 @@ const AppContainer = styled.div`
 
 function App() {
 
-  const { token, logout } = useContext(UserContext)
+  const { token, logout } = useContext(DrugContext)
 
   return (
     <div>

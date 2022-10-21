@@ -1,12 +1,29 @@
 import { useDebounce } from '../hooks/debounceHook'
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import {UserContext} from '../context/UserProvider.js'
 
 export const DrugContext = React.createContext()
 
+const userAxios = axios.create()
+
+userAxios.interceptors.request.use(config => {
+    const token = localStorage.getItem("token")
+    config.headers.Authorization = `Bearer ${token}`
+    return config
+})
+
 function DrugProvider(props) {
 
+    const initState = { 
+        user: JSON.parse(localStorage.getItem("user")) || {}, 
+        token: localStorage.getItem("token") || "",
+        notes: [],
+        errMsg: "",
+        selectedMeds: []
+    }
+    console.log("initstate: ", initState.selectedMeds)
+
+    const [userState, setUserState] = useState(initState)
     const [searchQuery, setSearchQuery] = useState("")
     const [rxcuiQuery, setRxcuiQuery] = useState("")
     const [noMedNames, setNoMedNames] = useState(false)
@@ -15,7 +32,6 @@ function DrugProvider(props) {
     const [isLoading, setLoading] = useState(false)
     const [interactions, setInteractions] = useState([])
     const [noRxcuis, setNoRxcuis] = useState(false)
-    const { token, userAxios, userState, setUserState, logout } = useContext(UserContext)
 
 
 
@@ -87,6 +103,60 @@ function DrugProvider(props) {
         setLoading(false)
     }
 
+    function signup(credentials) {
+        axios.post("/auth/signup", credentials)
+            .then(res => {
+                const { user, token } = res.data
+                localStorage.setItem("token", token)
+                localStorage.setItem("user", JSON.stringify(user))
+                setUserState(prevUserState => ({
+                    ...prevUserState,
+                    user, token
+                }))
+            })
+            .catch(err => handleAuthErr(err.response.data.errMsg))
+    }
+
+    function login(credentials) {
+        axios.post("/auth/login", credentials)
+            .then(res => {
+                const { user, token } = res.data
+                localStorage.setItem("token", token)
+                localStorage.setItem("user", JSON.stringify(user))
+                getUserNotes()
+                setUserState(prevUserState => ({
+                    ...prevUserState,
+                    user, token
+                }))
+            })
+            .catch(err => handleAuthErr(err.response.data.errMsg))
+    }
+
+    function logout() {
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
+        localStorage.removeItem("selectedMeds")
+        setUserState({
+            user: {},
+            token: "",
+            notes: [],
+        })
+    }
+
+    function handleAuthErr(errMsg) {
+        setUserState(prevState => ({
+            ...prevState,
+            errMsg
+        }))
+    }
+
+    function resetAuthErr() {
+        setUserState(prevState => ({
+            ...prevState,
+            errMsg: ""
+        }))
+    }
+
     const addMedList = (newMeds) => {
         axios.post("/rxlist", newMeds)
         .then(res => {
@@ -107,49 +177,19 @@ function DrugProvider(props) {
     useDebounce(searchQuery, 750, searchMedName)
     useDebounce(rxcuiQuery, 750, searchCrossInteraction)
    
-    // const getMedList = () => {
-    //     axios.get("/rxlist" )
-    //     .then(res => {
-    //         setSelectedMeds(res.data)
-    //     })
-    //     .catch(err => console.log(err.response.data.errMsg))
-    // }
-
-
-    // const addMedListLocalStorage = (newMeds) => {
-    //     if(token)  {
-    //         axios.post("/rxlist", newMeds)
-    //     .then(res => {
-    //         console.log("i am res.data:", res.data)
-    //         // const myMedList = [...selectedMeds, newMeds]
-    //         setSelectedMeds(prevState => {
-    //             console.log("Saved into setSelectedMeds", res.data)
-    //             return [...prevState, newMeds]
-    //         })
-    //         //if res.data in put in, the data delay of 1 is visible for selectedMeds; newMeds is direct
-    //     })
-    //     .catch(err => console.log(err.response.data.errMsg))
-    
-    //     } else {
-
-    //     const newSelected = [...selectedMeds, newMeds]
-    //     localStorage.setItem("selectedMeds", JSON.stringify(newSelected))
-    //     setSelectedMeds(newSelected)
-  
-    //     }
-    // }
 
     //trial useraxios user token route
     const addMedListLocalStorage = (newMeds) => {
-        if(token)  {
+        if(initState.token)  {
             userAxios.post("/api/rxlist", newMeds)
                 .then(res => {
                     console.log("addMedListLocalStorage function :", res.data)
                     // const myMedList = [...selectedMeds, newMeds]
-                    setSelectedMeds(prevState => {
-                        return [...prevState, newMeds]
-                     })
-                })
+                    setUserState(prevState => ({
+                        ...prevState,
+                        selectedMeds: [...prevState.selectedMeds, res.data]
+                    }))
+                 })
                 .catch(err => console.log(err.response.data.errMsg))
         } else {
                 const newSelected = [...selectedMeds, newMeds]
@@ -161,7 +201,7 @@ function DrugProvider(props) {
     //trial getmedlist from localStorage
     const getMedList = () => {
     //    localStorage.getItem("selectedMeds")
-        if(token) {
+        if(initState.token) {
             userAxios.get('api/rxlist/user' )
             .then(res => {
                 setSelectedMeds(res.data)
@@ -182,9 +222,29 @@ function DrugProvider(props) {
             .catch(err => console.log(err.response.data.errMsg))
     }
 
+    function getUserNotes() {
+        userAxios.get("/api/notes/user")
+            .then(res => setUserState(prevState => ({
+                ...prevState,
+                notes: res.data
+            })))
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+
+    function addNote(newNote) {
+        userAxios.post("api/notes", newNote)
+            .then(res => {
+                setUserState(prevState => ({
+                    ...prevState,
+                    notes: [...prevState.notes, res.data]
+                }))
+            })
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+
     useEffect(() => {
         JSON.parse(localStorage.getItem("selectedMeds"))
-    }, [selectedMeds, logout])
+    }, [selectedMeds])
 
     return (
         <DrugContext.Provider
@@ -209,7 +269,16 @@ function DrugProvider(props) {
                 searchCrossInteraction,
                 noRxcuis,
                 setNoRxcuis,
-                addMedListLocalStorage
+                addMedListLocalStorage,
+                ...userState,
+                signup,
+                login,
+                logout,
+                addNote,
+                getUserNotes,
+                resetAuthErr,
+                userAxios
+
             }}
         >
             {props.children}

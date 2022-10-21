@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import AuthForm from './AuthForm.js'
-import {UserContext} from '../context/UserProvider.js'
+import {DrugContext} from '../context/DrugProvider.js'
 
 
 function Auth(props) {
@@ -9,7 +9,7 @@ function Auth(props) {
     const [inputs, setInputs] = useState(initInputs)
     const [toggle, setToggle] = useState(false)
 
-    const { signup, login, errMsg, resetAuthErr, token } = useContext(UserContext)
+    const { signup, login, errMsg, resetAuthErr, token } = useContext(DrugContext)
 
     const handleChange = e => {
         const {name, value} = e.target
