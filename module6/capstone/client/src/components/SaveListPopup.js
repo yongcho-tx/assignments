@@ -1,5 +1,4 @@
 import React from 'react'
-import Auth from './Auth'
 import { IoClose } from 'react-icons/io5'
 import styled from "styled-components"
 import { motion } from 'framer-motion'

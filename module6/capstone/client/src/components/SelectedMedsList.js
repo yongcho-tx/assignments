@@ -9,21 +9,22 @@ function SelectedMedsList(props) {
     // const selectedMedArr = selectedMeds.map(med => <h3 key={med.rxcui} {...med}>Name: {med.name} Rxcui: {med.rxcui} </h3>)
 
 
-    // const uniqueRxcui = []
-    // const uniqueSelectedMeds = selectedMeds.filter(med => {
-    //     const isDuplicate = uniqueRxcui.includes(med.rxcui)
+    const uniqueRxcui = []
+    const uniqueSelectedMeds = selectedMeds.filter(med => {
+        const isDuplicate = uniqueRxcui.includes(med.rxcui)
 
-    //     if(!isDuplicate) {
-    //         uniqueRxcui.push(med.rxcui)
-    //         return true
-    //     }
-    //     return false
-    // })
-    // console.log("unique selection: ", uniqueSelectedMeds)
+        if(!isDuplicate) {
+            uniqueRxcui.push(med.rxcui)
+            return true
+        }
+        return false
+    })
+    console.log("unique selection: ", uniqueSelectedMeds)
+    
     return (
         
         <div>
-            {/* <div>
+            <div>
                 { uniqueSelectedMeds.length > 0 &&
                 <h1>Selected Meds List</h1>
                 }
@@ -36,8 +37,9 @@ function SelectedMedsList(props) {
                         </div>
                     )
                 })
-            } */}
-            <div>
+            }
+            
+            {/* <div>
                 { selectedMeds.length > 0 && 
                     <h1>Selected Meds List</h1>
                 }
@@ -49,7 +51,7 @@ function SelectedMedsList(props) {
             
                     )
                 })}
-            </div>
+            </div> */}
         </div>
     )
 }

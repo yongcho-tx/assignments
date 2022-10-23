@@ -17,12 +17,12 @@ export default function XInteractions(props) {
                 </>
             }    
             
-            { interactions.length > 0 && token &&
+            {/* { interactions.length > 0 && token &&
                  <>
                  <h2>Interaction Description: { interactions } <span><button onClick={() => setButtonPopup(true)}>Save to Profile</button></span></h2>
                  <SaveListPopup trigger={buttonPopup} setTrigger={setButtonPopup}/>
                  </>
-            }
+            } */}
                 
         </div>
     )
