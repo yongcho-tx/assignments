@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Auth from './Auth'
 import { IoClose } from 'react-icons/io5'
 import styled from "styled-components"
 import { motion } from 'framer-motion'
+import { DrugContext } from '../context/DrugProvider.js'
 
 function LoginPopup(props) {
+
+  const { token } = useContext(DrugContext)
+
   return (props.trigger) ? (
     <div className="popup">
         <div className="popup-inner">

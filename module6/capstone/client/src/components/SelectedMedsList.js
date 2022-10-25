@@ -24,7 +24,7 @@ function SelectedMedsList(props) {
     return (
         
         <div>
-            <div>
+            <div className="selectedmedslist-header">
                 { uniqueSelectedMeds.length > 0 &&
                 <h1>Selected Meds List</h1>
                 }
@@ -38,7 +38,7 @@ function SelectedMedsList(props) {
                     )
                 })
             }
-            
+
             {/* <div>
                 { selectedMeds.length > 0 && 
                     <h1>Selected Meds List</h1>

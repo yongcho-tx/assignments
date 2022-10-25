@@ -62,7 +62,7 @@ export default function Profile(props) {
 
     return (
         <div>
-            <h1>Welcome @{username}!</h1>
+            <h1 className="welcome-header">Welcome @{username}!</h1>
             <SearchBarContainer 
                 animate={isExpanded ? "expanded" : "collapsed"}
                 variants={containerVariants}
@@ -137,9 +137,11 @@ export default function Profile(props) {
                     }
                     
                 </div>
-                <Notesform addNote={addNote}/>
-                <h3>Your Notes</h3>
-                <NoteList notes={notes}/>
+                <div className="user-notes-container">
+                    <Notesform addNote={addNote}/>
+                    <h3>Your Notes</h3>
+                    <NoteList notes={notes}/>
+                </div>
             </div>
         </div>
     )

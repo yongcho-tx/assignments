@@ -122,6 +122,7 @@ function DrugProvider(props) {
                 const { user, token } = res.data
                 localStorage.setItem("token", token)
                 localStorage.setItem("user", JSON.stringify(user))
+                localStorage.removeItem("selectedMeds")
                 getUserNotes()
                 getMedList()
                 setUserState(prevUserState => ({
@@ -142,6 +143,7 @@ function DrugProvider(props) {
             notes: [],
         })
         setSelectedMeds([])
+        setInteractions([])
     }
 
     function handleAuthErr(errMsg) {
