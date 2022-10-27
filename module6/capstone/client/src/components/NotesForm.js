@@ -46,14 +46,6 @@ function NotesForm(props) {
         />
         <button> Submit </button>
       </form>
-      <div>
-        {allNotes.map((note) => (
-          <p key={note._id}>
-            {note.notes}
-            <button onClick={() => handleDelete(note._id)}>delete</button>
-          </p>
-        ))}
-      </div>
     </>
   )
 }

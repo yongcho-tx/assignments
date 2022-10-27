@@ -154,7 +154,7 @@ export default function Profile(props) {
         </div>
         <div className="user-notes-container">
           <Notesform addNote={addNote} />
-          <h3 className="notes-header">Your Notes</h3>
+          <h2 className="notes-header">Your Notes</h2>
           <NoteList notes={notes} />
         </div>
       </div>

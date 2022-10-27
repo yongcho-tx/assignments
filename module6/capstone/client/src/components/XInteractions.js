@@ -3,7 +3,7 @@ import { DrugContext } from "../context/DrugProvider.js"
 import LoginPopup from "./LoginPopup.js"
 import SaveListPopup from "./SaveListPopup.js"
 
-function XInteractions(props) {
+function XInteractions() {
   const { interactions, token } = useContext(DrugContext)
   const [buttonPopup, setButtonPopup] = useState(false)
 

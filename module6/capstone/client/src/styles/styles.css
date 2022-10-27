@@ -58,6 +58,7 @@
 
 .welcome-header {
   padding-bottom: 1em;
+  text-align: center;
 }
 
 .popup {
@@ -101,8 +102,8 @@
   border: 1px solid black;
   display: flex;
   align-items: left;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
+  flex-direction: row;
   margin-top: 2em;
   padding: 2em;
 }
@@ -120,6 +121,14 @@
 
 .selectedmeds-layout {
   margin: 1em 0 1em 0;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 1em;
+}
+
+.selectedmeds-layout:hover {
+  background: rgb(191, 11, 11);
+  color: #bebebe;
 }
 
 .interactions-container {
